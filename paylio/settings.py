@@ -170,8 +170,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = BASE_DIR / 'media'
 LOGOUT_REDIRECT_URL = '/admin/login/'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-# Collectstatic should not fail when a JS/CSS file references a missing source map.
+# Use CompressedStaticFilesStorage to avoid manifest post-processing errors
+# caused by missing vendor source maps during collectstatic.
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 WHITENOISE_MANIFEST_STRICT = False
 
 
