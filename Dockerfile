@@ -23,7 +23,11 @@ COPY . .
 
 RUN python manage.py collectstatic --noinput
 
+# Copy and make startup script executable
+COPY startup.sh /app/startup.sh
+RUN chmod +x /app/startup.sh
+
 # Align container port with platform-provided $PORT (default to 8000 locally)
 EXPOSE 8080
 
-CMD ["sh", "-c", "python manage.py migrate --noinput && gunicorn paylio.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+CMD ["/app/startup.sh"]
