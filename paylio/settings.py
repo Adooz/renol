@@ -162,7 +162,8 @@ LOGOUT_REDIRECT_URL = "userauths:sign-in"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'paylio', 'static')]
 #STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'),]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+# Where collectstatic outputs files for production. Keep separate from source static.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 
 MEDIA_URL = '/media/'
@@ -170,6 +171,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = BASE_DIR / 'media'
 LOGOUT_REDIRECT_URL = '/admin/login/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# Collectstatic should not fail when a JS/CSS file references a missing source map.
+WHITENOISE_MANIFEST_STRICT = False
 
 
 # Default primary key field type
