@@ -27,8 +27,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-&5arq9bhko6k2xk9c7qpt&1iyi7nh-i92le0-ekf*@j--pl3ul"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['paylio-app.up.railway.app', '127.0.0.1', 'localhost']
-DEBUG = True
+# Make DEBUG and hosts configurable via environment for deployments.
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.getenv(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1,.up.railway.app'
+).split(',')
+
+# Trust common proxy hostnames used in deployment by default; override via env.
+_csrf_trusted = os.getenv(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://*.up.railway.app,https://localhost,https://127.0.0.1'
+)
+CSRF_TRUSTED_ORIGINS = [h.strip() for h in _csrf_trusted.split(',') if h.strip()]
 
 # ALLOWED_HOSTS = ['paylio-app.up.railway.app', 'localhost', '127.0.0.1']
 
