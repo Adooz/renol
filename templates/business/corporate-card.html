@@ -1,0 +1,541 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MyRoanokeHeritage - Online Banking</title>
+
+    <link rel="shortcut icon" href="{% static 'assets/images/fav.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugin/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugin/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugin/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/arafat-font.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugin/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+    <!-- start preloader -->
+    <div class="preloader" id="preloader"></div>
+    <!-- end preloader -->
+
+    <!-- Scroll To Top Start-->
+    <a href="javascript:void(0)" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
+    <!-- Scroll To Top End -->
+
+    <!-- header-section start -->
+    <header class="header-section">
+        <div class="overlay">
+            <div class="container">
+                <div class="row d-flex header-area">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{% url 'core:index' %}">
+                            <img src="https://i.imgur.com/ts4UxJ4.png" class="logo" alt="logo">
+                        </a>
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbar-content">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbar-content">
+                            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown main-navbar">
+                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Personal</a>
+                                    <ul class="dropdown-menu main-menu shadow">
+                                        <li><a class="nav-link" href="{% url 'core:payments' %}">Checking Accounts</a>
+                                        </li>
+                                        <li><a class="nav-link" href="{% url 'core:subscriptions' %}">Savings
+                                                Accounts</a></li>
+                                        <li><a class="nav-link" href="{% url 'core:security' %}">Personal Loans</a></li>
+                                    </ul>
+                                </li>
+                                <li class='nav-item dropdown main-navbar'>
+                                    <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                        data-bs-toggle="dropdown" data-bs-auto-close="outside">Business</a>
+                                    <ul class="dropdown-menu main-menu shadow">
+                                        <li><a class="nav-link" href="{% url 'core:business-account' %}">Business
+                                                Checking</a></li>
+                                        <li><a class="nav-link" href="{% url 'core:corporate-card' %}">Business Credit
+                                                Cards</a></li>
+                                        <li><a class="nav-link" href="{% url 'core:expense-management' %}">Merchant
+                                                Services</a></li>
+                                        <li><a class="nav-link" href="{% url 'core:budgeting-and-analytics' %}">Business
+                                                Loans</a></li>
+                                        <li><a class="nav-link" href="{% url 'core:integrations' %}">Cash Management</a>
+                                        </li>
+                                        <li><a class="nav-link" href="{% url 'core:invoice-management' %}">Payroll
+                                                Services</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'core:about' %}">About Us</a>
+                                </li>
+                            </ul>
+                            </li>
+                            </ul>
+                            <div class="right-area header-action d-flex align-items-center max-un">
+                                <a href="{% url 'userauths:sign-in' %}" class="login">Login</a>
+                                <a href="{% url 'userauths:sign-up' %}" class="cmn-btn">Sign Up
+                                    <i class=""></i>
+                                </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-section end -->
+
+    <!-- Banner Section start -->
+    <section class="banner-section corporate-card">
+        <div class="overlay">
+            <div class="banner-content">
+                <div class="container wow fadeInUp">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-lg-6 col-md-7">
+                            <div class="main-content">
+                                <div class="top-area section-text">
+                                    <h5 class="sub-title">Business credit that works as hard as you do</h5>
+                                    <h1 class="title">Business credit cards with built-in controls</h1>
+                                    <p class="xlr">Issue cards, set limits by team or vendor, and earn cash back on
+                                        everyday business spend—all backed by MyRoanokeHeritage Bank.</p>
+                                </div>
+                                <div class="bottom-area d-xxl-flex">
+                                    <a href="{% url 'userauths:sign-up' %}" class="cmn-btn">Open a Free Account</a>
+                                    <a class="cmn-btn active" href="{% url 'core:about' %}">See How it Works</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section end -->
+
+    <!-- Feature start -->
+    <section class="global-payment feature">
+        <div class="overlay pt-120 pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7">
+                        <div class="section-header text-center">
+                            <h5 class="sub-title">Bank-issued credit, modern controls</h5>
+                            <h2 class="title">More rewards, tighter oversight, less busywork</h2>
+                            <p>Build your card program on a secure banking platform with real-time visibility and
+                                policies that match the way you operate.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cus-mar">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-item">
+                            <img src="{% static 'assets/images/icon/features-corporate-icon-1.png' %}" alt="icon">
+                            <h5>Earn cash back</h5>
+                            <p>Get value on the purchases your team makes every day with straightforward cash back on
+                                eligible spend.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-item">
+                            <img src="{% static 'assets/images/icon/features-corporate-icon-2.png' %}" alt="icon">
+                            <h5>Track spending live</h5>
+                            <p>Real-time alerts, card-level limits, and category controls keep budgets on track without
+                                spreadsheets.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-item">
+                            <img src="{% static 'assets/images/icon/features-corporate-icon-3.png'%}" alt="icon">
+                            <h5>No annual fee</h5>
+                            <p>No annual or setup fees, and quick digital issuance so teams can start purchasing right
+                                away.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature end -->
+
+    <!-- Multi Currency start -->
+    <section class="multi-currency">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-6">
+                        <div class="section-text">
+                            <h5 class="sub-title">Accepted worldwide</h5>
+                            <h2 class="title">Business cards your team can use everywhere</h2>
+                            <p>Wherever Visa is accepted, your team can pay with confidence. Set travel controls,
+                                monitor spend, and lean on our support if anything looks off.</p>
+                        </div>
+                        <div class="btn-area">
+                            <a href="{% url 'userauths:sign-up' %}" class="cmn-btn">Open Account</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sec-image">
+                            <img src="{% static 'assets/images/multi-currency-img.png' %}" alt="image" class="max-un">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Multi Currency end -->
+
+    <!-- Earn Cashback start -->
+    <section class="earn-cashback">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-5 order-md-0 order-1">
+                        <div class="sec-image d-rtl">
+                            <img src=" {% static 'assets/images/earn-cashback-image.png' %}" alt="image" class="max-un">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="section-text">
+                            <h5 class="sub-title">Radically better company cards</h5>
+                            <h2 class="title">Earn cashback on your digital spend</h2>
+                            <p>Earn 1% cashback on digital marketing and SaaS spend with the biggest names in business
+                                tech.</p>
+                        </div>
+                        <div class="btn-area">
+                            <a href="{% url 'userauths:sign-up' %}" class="cmn-btn">Open Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Earn Cashback end -->
+
+    <!-- Stay in Control start -->
+    <section class="stay-control">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-5">
+                        <div class="section-text">
+                            <h5 class="sub-title">Stay in Control, in Real Time</h5>
+                            <h2 class="title">Stay in control over your cards and transactions</h2>
+                            <p>Set card budgets to control spend, update spend limits anytime. Get real-time spend
+                                notifications and save time with auto categorisation.</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <img src="{% static 'assets/images/icon/stay-control-icon-1.png' %}" alt="image">
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/images/icon/stay-control-icon-2.png' %}" alt="image">
+                                <p>Set Spend Limit</p>
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/images/icon/stay-control-icon-3.png' %}" alt="image">
+                                <p>Replace Card</p>
+                            </li>
+                            <li>
+                                <img src="{% static 'assets/images/icon/stay-control-icon-4.png' %}" alt="image">
+                                <p>Cancel Card</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="sec-image">
+                            <img src="{% static 'assets/images/stay-control-image.png' %}" alt="image" class="max-un">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Stay in Control end -->
+
+    <!-- Secure and integrated start -->
+    <section class="secure-integrated">
+        <div class="overlay pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-5 order-md-0 order-1">
+                        <div class="sec-image d-rtl">
+                            <img src="{% static 'assets/images/secure-integrated-illu.png' %}" alt="image"
+                                class="max-un">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="section-text">
+                            <h5 class="sub-title">Secure and integrated</h5>
+                            <h2 class="title">Control the security of your company cards</h2>
+                            <p>Cancel or freeze cards anytime, with advanced fraud protection. All your transactions are
+                                automatically synced with your accounting software.</p>
+                        </div>
+                        <div class="section-bottom">
+                            <ul>
+                                <li>
+                                    <img src="{% static 'assets/images/icon/check-3.png' %}" alt="icon">
+                                    Temporarily freeze missing cards in your app or web dashboard
+                                </li>
+                                <li>
+                                    <img src="{% static 'assets/images/icon/check-3.png' %}" alt="icon">
+                                    Enable location-based security to reduce fraudulent transactions
+                                </li>
+                                <li>
+                                    <img src="{% static 'assets/images/icon/check-3.png' %}" alt="icon">
+                                    Disable contactless, online or swipe payments when necessary to ensure your card’s
+                                    safety
+                                </li>
+                                <li>
+                                    <img src="{% static 'assets/images/icon/check-3.png' %}" alt="icon">
+                                    Toggle the ability to make cash withdrawals from ATMs for extra security
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Secure and integrated end -->
+
+    <!-- Testimonials start -->
+    <section class="testimonials">
+        <div class="overlay pt-120 pb-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="section-header text-center">
+                            <h5 class="sub-title">Testimonials</h5>
+                            <h2 class="title">What Our Customers Say</h2>
+                            <p>245m+ happy clients all around the world. Don’t just take our word for it</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid wow fadeInUp">
+                <div class="testimonials-carousel">
+                    <div class="single-slide">
+                        <div class="single-content">
+                            <div class="start-area">
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            </div>
+                            <h5 class="title-area">The Easiest Way to Get Paid</h5>
+                            <p class="xlr">"As a freelancer working with clients abroad, MyRoanokeHeritage Bank has been
+                                a total game-changer. Fast transfers, no hidden fees, and I get paid in my local
+                                currency. Love it."</p>
+                            <div class="profile-area d-flex align-items-center">
+                                <div class="icon-area">
+                                    <img src="{% static 'assets/images/testimonials-img-1.png' %}" alt="icon">
+                                </div>
+                                <div class="text-area">
+                                    <h5>Aspen Press</h5>
+                                    <p>Web Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="single-content">
+                            <div class="start-area">
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            </div>
+                            <h5 class="title-area">Smooth, Seamless, Secure</h5>
+                            <p class="xlr">"We’ve tried a few payment platforms before, but MyRoanokeHeritage Bank
+                                stands out. The interface is intuitive, the fees are fair, and everything just works.
+                                Total peace of mind."</p>
+                            <div class="profile-area d-flex align-items-center">
+                                <div class="icon-area">
+                                    <img src="{% static 'assets/images/testimonials-img-2.png' %}" alt="icon">
+                                </div>
+                                <div class="text-area">
+                                    <h5>Courtney Henry</h5>
+                                    <p>Balance Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="single-content">
+                            <div class="start-area">
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            </div>
+                            <h5 class="title-area">Perfect for Global Teams</h5>
+                            <p class="xlr">"Our team is spread across 5 countries, and MyRoanokeHeritage Bank helps us
+                                pay everyone on time, without the usual banking headaches. It’s flexible, fast, and
+                                super reliable."</p>
+                            <div class="profile-area d-flex align-items-center">
+                                <div class="icon-area">
+                                    <img src="{% static 'assets/images/testimonials-img-3.png' %}" alt="icon">
+                                </div>
+                                <div class="text-area">
+                                    <h5>Paul Howell</h5>
+                                    <p>President of Sales</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-slide">
+                        <div class="single-content">
+                            <div class="start-area">
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            </div>
+                            <h5 class="title-area">Great Fast Reliable Service</h5>
+                            <p class="xlr">"MyRoanokeHeritage Bank made it easy to collect payments from my clients
+                                without stressing about wire transfers or exchange rates. I highly recommend
+                                MyRoanokeHeritage Bank to businesses with regular overseas payments."</p>
+                            <div class="profile-area d-flex align-items-center">
+                                <div class="icon-area">
+                                    <img src="{% static 'assets/images/testimonials-img-2.png' %}" alt="icon">
+                                </div>
+                                <div class="text-area">
+                                    <h5>Courtney Henry</h5>
+                                    <p>Balance Studio</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- App Download end -->
+
+    <!-- Call To Action start -->
+    <section class="call-action">
+        <div class="overlay pt-120">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 text-center">
+                        <div class="section-text">
+                            <h2 class="title">Join MyRoanokeHeritage Bank Business.</h2>
+                            <p>No-fuss company cards for team members, instant virtual cards for security and
+                                flexibility — all set up with our easy expense management</p>
+                        </div>
+                        <div class="btn-area">
+                            <a href="{% url 'userauths:sign-up' %}" class="cmn-btn">Sign up in minutes</a>
+                            <a href="help-center.html" class="cmn-btn active">Talk to an expert</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call To Action end -->
+
+    <!-- Footer Area Start -->
+    <footer class="footer-section">
+        <div class="container pt-120">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="newsletter">
+                        <div class="section-area mb-30 dark-sec text-center">
+                            <h3 class="title">Subscribe to Our Newsletter</h3>
+                        </div>
+                        <form action="#">
+                            <div class="form-group d-flex align-items-center">
+                                <input type="text" placeholder="Your Email Address">
+                                <button><img src="{% static 'assets/images/icon/arrow-right-2.png' %}"
+                                        alt="icon"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-area pt-120">
+                <div class="footer-top">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 d-flex justify-content-center justify-content-sm-start">
+                            <div class="menu-item">
+                                <ul class="footer-link d-flex align-items-center">
+                                    <li><a href="/about">About Us</a></li>
+                                    <li><a href="help-center.html">Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div
+                                class="social-link d-flex justify-content-sm-end justify-content-center align-items-center">
+                                <a href="https://www.facebook.com/anvarbekziyodov/" target="_blank">
+                                    <img src="{% static 'assets/images/icon/facebook.png' %}" alt="Facebook icon">
+                                </a>
+                                <a href="https://www.linkedin.com/in/anvarbekziyodov/" target="_blank">
+                                    <img src="{% static 'assets/images/icon/linkedin.png' %}" alt="LinkedIn icon">
+                                </a>
+                                <a href="https://www.instagram.com/anvarbek_ziyodov/" target="_blank">
+                                    <img src="{% static 'assets/images/icon/instagram.png' %}" alt="Instagram icon">
+                                </a>
+                                <a href="https://x.com/AnvarbekZiyodov" target="_blank">
+                                    <img src="{% static 'assets/images/icon/twitter.png' %}" alt="Twitter icon">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="row justify-content-between align-items-center">
+                        <div
+                            class="col-md-6 col-sm-8 d-flex justify-content-center justify-content-sm-start order-sm-0 order-1">
+                            <div class="copyright text-center text-sm-start">
+                                <p> Copyright © 2022 <a href="index.html">MyRoanokeHeritage Bank.</a> All Rights
+                                    Reserved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-4">
+                            <div class="menu-item">
+                                <ul
+                                    class="footer-link d-flex justify-content-sm-end justify-content-center align-items-center">
+                                    <li><a href="terms-conditions.html">Terms</a></li>
+                                    <li><a href="privacy-policy.html">Privacy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End -->
+
+    <!--==================================================================-->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/fontawesome.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/slick.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/counter.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/waypoint.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugin/plugin.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+
+</html>

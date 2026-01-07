@@ -1,0 +1,439 @@
+/* ========================================
+   DASHBOARD PROFESSIONAL BANKING STYLING
+   ======================================== */
+
+/* Root CSS Variables - Banking Colors */
+:root {
+    --bank-primary: #005481;
+    --bank-accent: #0077b6;
+    --bank-secondary: #003d5c;
+    --bank-light: #f8f9fa;
+    --bank-border: rgba(0, 84, 129, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+}
+
+/* ========================================
+   1. TYPOGRAPHY - PROFESSIONAL BANKING
+   ======================================== */
+
+body,
+html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   2. DASHBOARD HEADER & NAVIGATION
+   ======================================== */
+
+.header,
+.navbar,
+.navbar-brand {
+    background: linear-gradient(135deg, var(--bank-primary) 0%, var(--bank-accent) 100%);
+    box-shadow: 0 2px 12px rgba(0, 84, 129, 0.15);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* ========================================
+   3. SIDEBAR STYLING
+   ======================================== */
+
+.sidebar {
+    background: var(--bank-light);
+    border-right: 1px solid var(--bank-border);
+}
+
+.sidebar-menu li a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li a.active {
+    background: var(--bank-primary);
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+.sidebar-menu li a i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   4. CARDS & CONTAINERS
+   ======================================== */
+
+.card,
+.box,
+.dashboard-card {
+    background: #ffffff;
+    border: 1px solid var(--bank-border);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover,
+.box:hover,
+.dashboard-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 84, 129, 0.12);
+    transform: translateY(-2px);
+    border-color: var(--bank-accent);
+}
+
+.card-header,
+.box-header {
+    background: linear-gradient(135deg, rgba(0, 84, 129, 0.04) 0%, rgba(0, 119, 182, 0.04) 100%);
+    border-bottom: 1px solid var(--bank-border);
+    border-radius: 12px 12px 0 0;
+    padding: 20px;
+}
+
+.card-title,
+.box-title {
+    color: var(--bank-primary);
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   5. BUTTONS
+   ======================================== */
+
+.btn-primary,
+.btn-main,
+.btn {
+    background: linear-gradient(135deg, var(--bank-primary) 0%, var(--bank-accent) 100%);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 10px 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 84, 129, 0.2);
+}
+
+.btn-primary:hover,
+.btn-main:hover,
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 84, 129, 0.3);
+}
+
+.btn-secondary {
+    background: var(--bank-light);
+    color: var(--bank-primary);
+    border: 1px solid var(--bank-border);
+}
+
+.btn-secondary:hover {
+    background: var(--bank-primary);
+    color: #ffffff;
+    border-color: var(--bank-primary);
+}
+
+/* ========================================
+   6. FORMS & INPUTS
+   ======================================== */
+
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    background: #ffffff;
+    border: 1px solid var(--bank-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus {
+    border-color: var(--bank-accent);
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* ========================================
+   7. TABLES
+   ======================================== */
+
+.table {
+    font-family: 'Inter', sans-serif;
+}
+
+.table thead {
+    background: rgba(0, 84, 129, 0.08);
+    border-bottom: 2px solid var(--bank-border);
+}
+
+.table thead th {
+    color: var(--bank-primary);
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody td {
+    border-color: var(--bank-border);
+    padding: 16px;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(0, 84, 129, 0.02);
+}
+
+/* ========================================
+   8. STATUS BADGES & INDICATORS
+   ======================================== */
+
+.badge,
+.status {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.badge-success,
+.status-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.badge-warning,
+.status-warning {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.badge-danger,
+.status-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.badge-info,
+.status-info {
+    background: rgba(0, 119, 182, 0.1);
+    color: var(--bank-accent);
+}
+
+/* ========================================
+   9. ALERT MESSAGES
+   ======================================== */
+
+.alert {
+    border: 1px solid var(--bank-border);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.2);
+    color: #166534;
+}
+
+.alert-warning {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.2);
+    color: #92400e;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #7f1d1d;
+}
+
+.alert-info {
+    background: rgba(0, 119, 182, 0.08);
+    border-color: rgba(0, 119, 182, 0.2);
+    color: var(--bank-primary);
+}
+
+/* ========================================
+   10. DASHBOARD STATISTICS
+   ======================================== */
+
+.stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-left: 4px solid var(--bank-primary);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.stat-card:hover {
+    border-left-color: var(--bank-accent);
+    transform: translateY(-4px);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--bank-primary);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ========================================
+   11. ANIMATIONS
+   ======================================== */
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-card {
+    animation: slideInUp 0.5s ease-out;
+}
+
+.sidebar-menu li {
+    animation: slideInLeft 0.4s ease-out;
+}
+
+/* ========================================
+   12. RESPONSIVE ENHANCEMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .card,
+    .box {
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .stat-card {
+        margin-bottom: 16px;
+    }
+}
+
+/* ========================================
+   13. UTILITY CLASSES
+   ======================================== */
+
+.text-bank-primary {
+    color: var(--bank-primary);
+}
+
+.text-bank-accent {
+    color: var(--bank-accent);
+}
+
+.bg-bank-light {
+    background: var(--bank-light);
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-md {
+    box-shadow: 0 8px 24px rgba(0, 84, 129, 0.12);
+}
+
+.rounded-lg {
+    border-radius: 12px;
+}
+
+.transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

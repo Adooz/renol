@@ -1,0 +1,833 @@
+/* MyRoanokeHeritage Bank - Professional Enhancements */
+
+/* ========================================
+   1. TYPOGRAPHY IMPROVEMENTS - BANK INDUSTRY STANDARD
+   ======================================== */
+
+/* Major banks like Chase, Bank of America, Capital One use clean sans-serif fonts */
+/* This matches their professional, trustworthy aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Enhanced font hierarchy - Industry standard banking typography */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+h1,
+.title {
+    font-weight: 800;
+    font-size: 2.75rem;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 2.25rem;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 1.75rem;
+}
+
+.sub-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #005481;
+}
+
+/* Smoother text rendering */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ========================================
+   2. ANIMATION ENHANCEMENTS - MAJOR BANK STYLE
+   ======================================== */
+
+/* Smooth fade-in for all sections */
+.wow {
+    visibility: hidden;
+}
+
+.wow.animated {
+    visibility: visible;
+}
+
+/* Icon bounce animation (like Chase feature icons) - ENHANCED */
+@keyframes iconBounce {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-18px) scale(1.12);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.08);
+    }
+
+    75% {
+        transform: translateY(-14px) scale(1.10);
+    }
+}
+
+.icon-bounce {
+    animation: iconBounce 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ripple effect for buttons (Material Design) */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Navbar scroll effects (like Wells Fargo) */
+.header-section {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-section.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.header-section.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* Custom banking animations */
+@keyframes floatUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   LIVE ANIMATIONS - MORE DYNAMIC
+   ======================================== */
+
+/* Floating animation for hero elements - ENHANCED */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-30px);
+    }
+}
+
+.float-animation {
+    animation: float 5s ease-in-out infinite;
+}
+
+.float-animation-slow {
+    animation: float 7s ease-in-out infinite;
+}
+
+.float-animation-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+/* Pulse glow effect for important buttons */
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 84, 129, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(0, 84, 129, 0);
+    }
+}
+
+.cmn-btn.pulse {
+    animation: pulseGlow 2s infinite;
+}
+
+/* Gradient animation for backgrounds */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient {
+    background: linear-gradient(-45deg, #005481, #0077b6, #003d5c, #005481);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+/* Shimmer effect for cards/images */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 3s infinite;
+}
+
+/* Typing cursor effect */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+}
+
+/* Scale on hover with bounce */
+.scale-bounce:hover {
+    animation: scaleBounce 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleBounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Rotating badge/icon */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-slow {
+    animation: rotate 20s linear infinite;
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10%,
+    30% {
+        transform: scale(1.1);
+    }
+
+    20%,
+    40% {
+        transform: scale(1);
+    }
+}
+
+.heartbeat {
+    animation: heartbeat 2s ease-in-out infinite;
+}
+}
+
+100% {
+    transform: translateX(0);
+    opacity: 1;
+}
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Apply animations */
+.animate-float {
+    animation: floatUp 0.8s ease-out forwards;
+}
+
+.animate-slide {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-scale {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.animate-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animate-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animate-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animate-delay-4 {
+    animation-delay: 0.4s;
+}
+
+/* ========================================
+   3. BUTTON & INTERACTION ENHANCEMENTS
+   ======================================== */
+
+.cmn-btn,
+.cmdn-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cmn-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.cmn-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.cmn-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   4. CARD & SECTION ENHANCEMENTS
+   ======================================== */
+
+.single-box,
+.single-content,
+.single-slide,
+.single-item {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-box:hover,
+.single-content:hover,
+.single-item:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* Add subtle background pattern */
+.banner-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(var(--primary-rgb, 0, 84, 129), 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(var(--primary-rgb, 0, 84, 129), 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ========================================
+   5. ICON & IMAGE IMPROVEMENTS
+   ======================================== */
+
+.icon-area img,
+.single-box img,
+.single-item img {
+    transition: all 0.4s ease;
+}
+
+.icon-area:hover img,
+.single-box:hover img,
+.single-item:hover img {
+    transform: scale(1.15) rotate(8deg);
+}
+
+/* Add subtle gradient overlays to images */
+.banner-content img {
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* ========================================
+   6. SMOOTH SCROLLING
+   ======================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   7. LOADING STATES
+   ======================================== */
+
+.skeleton-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ========================================
+   8. PROFESSIONAL SHADOWS & DEPTH
+   ======================================== */
+
+.shadow {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.shadow:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ========================================
+   9. RESPONSIVE ENHANCEMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+
+    .animate-float,
+    .animate-slide {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+}
+
+/* ========================================
+   10. MICRO-INTERACTIONS
+   ======================================== */
+
+/* Smooth link transitions */
+a {
+    transition: all 0.3s ease;
+}
+
+/* Form input enhancements */
+input,
+select,
+textarea {
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 84, 129, 0.15);
+}
+
+/* Navbar hover effects */
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* ========================================
+   11. PROFESSIONAL COLOR OVERLAYS
+   ======================================== */
+
+/* Banking trust colors */
+:root {
+    --bank-primary: #005481;
+    --bank-secondary: #003d5c;
+    --bank-accent: #0077b6;
+    --bank-light: #e8f4f8;
+    --bank-dark: #002333;
+}
+
+/* Gradient backgrounds */
+.gradient-overlay {
+    background: linear-gradient(135deg, var(--bank-primary) 0%, var(--bank-secondary) 100%);
+}
+
+/* ========================================
+   12. TESTIMONIAL ENHANCEMENTS
+   ======================================== */
+
+.testimonials .single-slide {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.testimonials .single-content {
+    border-left: 4px solid var(--bank-primary);
+}
+
+/* ========================================
+   13. COUNTER ANIMATION
+   ======================================== */
+
+.counter {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ========================================
+   14. ACCESSIBILITY ENHANCEMENTS
+   ======================================== */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--bank-accent);
+    outline-offset: 2px;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   15. MORE LIVE EFFECTS
+   ======================================== */
+
+/* Custom cursor follower */
+.cursor-follower {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #005481;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.6;
+}
+
+.cursor-follower.cursor-hidden {
+    opacity: 0;
+    transform: scale(1.5);
+}
+
+/* Particle canvas */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Custom tooltips */
+.custom-tooltip {
+    position: absolute;
+    background: #002333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.custom-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.custom-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #002333;
+}
+
+/* Progress bars with animation */
+.progress-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #005481, #0077b6);
+    border-radius: 10px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0;
+    box-shadow: 0 2px 8px rgba(0, 84, 129, 0.3);
+}
+
+/* Countdown timer styling */
+.countdown-timer {
+    font-family: 'Inter', monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #005481;
+    letter-spacing: 0.1em;
+}
+
+/* Glowing text effect */
+.glow-text {
+    text-shadow: 0 0 10px rgba(0, 119, 182, 0.5),
+        0 0 20px rgba(0, 119, 182, 0.3),
+        0 0 30px rgba(0, 119, 182, 0.2);
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(0, 119, 182, 0.5),
+            0 0 20px rgba(0, 119, 182, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(0, 119, 182, 0.8),
+            0 0 30px rgba(0, 119, 182, 0.6),
+            0 0 40px rgba(0, 119, 182, 0.4);
+    }
+}
+
+/* Image zoom on hover */
+.image-zoom-container {
+    overflow: hidden;
+}
+
+.image-zoom-container img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-zoom-container:hover img {
+    transform: scale(1.1);
+}
+
+/* Slide in from sides */
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-left {
+    animation: slideInFromLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.slide-in-right {
+    animation: slideInFromRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger delays for multiple elements */
+.stagger-1 {
+    animation-delay: 0.1s;
+}
+
+.stagger-2 {
+    animation-delay: 0.2s;
+}
+
+.stagger-3 {
+    animation-delay: 0.3s;
+}
+
+.stagger-4 {
+    animation-delay: 0.4s;
+}
+
+.stagger-5 {
+    animation-delay: 0.5s;
+}
+
+/* Reveal on scroll */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}

@@ -1,0 +1,687 @@
+{% extends "partials/base.html" %}
+{% block content %}
+{% load static %}
+<!-- Banner Section start -->
+<section class="banner-section index">
+    <div class="overlay">
+        <div class="shape-area">
+            <img src="{% static 'assets/images/banner-box.png' %}" class="obj-1 float-animation" alt="image">
+            <img src="{% static 'assets/images/banner-human.png' %}" class="obj-2 float-animation-slow" alt="image">
+            <img src="{% static 'assets/images/banner-rocket.png' %}" class="obj-3 float-animation-delayed" alt="image">
+            <img src="{% static 'assets/images/banner-clock.png' %}" class="obj-4 float-animation" alt="image">
+        </div>
+        <div class="banner-content">
+            <div class="container wow fadeInUp">
+                <div class="content-shape">
+                    <img src="{% static 'assets/images/banner-wallet.png' %}" class="obj-1" alt="image">
+                </div>
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="main-content">
+                            <div class="top-area section-text">
+                                <h5 class="sub-title">Trusted by communities across Roanoke</h5>
+                                <h1 class="title">Banking Built for Heritage</h1>
+                                <p class="xlr">Securely manage your accounts, transfer funds, and preserve financial
+                                    history with MyRoanokeHeritage. Built for community trust and modern banking needs.
+                                </p>
+                            </div>
+                            <div class="bottom-area d-xxl-flex">
+                                <a href="{% url 'userauths:sign-up' %}" class="cmn-btn pulse">Open a Free Account</a>
+                                <a class="cmn-btn active" href="/about">See How it Works</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-5 col-md-6">
+                        <div class="send-money">
+                            <form action="#">
+                                <div class="currency-area">
+                                    <div class="left-side">
+                                        <span class="mdr">You send</span>
+                                        <h5>1,000</h5>
+                                    </div>
+                                    <div class="right-side">
+                                        <select>
+                                            <option value="1">USD</option>
+                                            <option value="2">KRW</option>
+                                            <option value="3">AUS</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="calculation">
+                                    <div class="head-area">
+                                        <img src="{% static 'assets/images/icon/conversion.png' %}" alt="image">
+                                        <span class="mdr highlight">Show calculation</span>
+                                    </div>
+                                    <div class="calculation-details">
+                                        <div class="single-area d-flex align-items-center">
+                                            <div class="left-area">
+                                                <i class="fas fa-minus"></i>
+                                                <span class="mdr">10.04 USD</span>
+                                            </div>
+                                            <div class="right-area">
+                                                <span class="mdr">Our fee</span>
+                                            </div>
+                                        </div>
+                                        <div class="single-area d-flex align-items-center">
+                                            <div class="left-area">
+                                                <i class="fas fa-equals"></i>
+                                                <span class="mdr">989.96 USD</span>
+                                            </div>
+                                            <div class="right-area">
+                                                <span class="mdr">We’ll Convert</span>
+                                            </div>
+                                        </div>
+                                        <div class="single-area d-flex align-items-center">
+                                            <div class="left-area">
+                                                <i class="fas fa-times"></i>
+                                                <span class="mdr">1.3947</span>
+                                            </div>
+                                            <div class="right-area">
+                                                <span class="mdr highlight">Our Rate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="currency-area">
+                                    <div class="left-side">
+                                        <span class="mdr">Recipient gets</span>
+                                        <h5>1,380.69</h5>
+                                    </div>
+                                    <div class="right-side recipient">
+                                        <select>
+                                            <option value="1">AUS</option>
+                                            <option value="2">USD</option>
+                                            <option value="3">KRW</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="btn-area mt-40">
+                                    <a href="javascript:void(0)" class="cmn-btn w-100">Get Started</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="counter-section">
+        <div class="container wow fadeInUp">
+            <div class="row cus-mar">
+                <div class="col-xl-3 col-md-3 col-sm-6">
+                    <div class="single-area d-flex align-items-center justify-content-center wow fadeInUp"
+                        data-wow-delay="0.1s">
+                        <div class="text-area text-center">
+                            <h2><span class="counter">50</span><span>+</span></h2>
+                            <p>Supported Currencies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-6">
+                    <div class="single-area d-flex align-items-center justify-content-center wow fadeInUp"
+                        data-wow-delay="0.2s">
+                        <div class="text-area text-center">
+                            <h2><span class="counter">100</span><span>+</span></h2>
+                            <p>Available Countries</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-6">
+                    <div class="single-area d-flex align-items-center justify-content-center wow fadeInUp"
+                        data-wow-delay="0.3s">
+                        <div class="text-area text-center">
+                            <h2><span class="counter">70</span><span>+</span></h2>
+                            <p>Payment Methods</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-3 col-sm-6">
+                    <div class="single-area d-flex align-items-center justify-content-center wow fadeInUp"
+                        data-wow-delay="0.4s">
+                        <div class="text-area text-center">
+                            <h2><span class="counter">7</span><span>/</span><span
+                                    class="counter">24</span><span>+</span></h2>
+                            <p>Support Team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section end -->
+
+<!-- Global Payment start -->
+<section class="global-payment">
+    <div class="overlay pt-120 pb-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-header text-center">
+                        <h5 class="sub-title">Banking Made Simple</h5>
+                        <h2 class="title">Roanoke's Trusted Bank</h2>
+                        <p>Join thousands of neighbors who trust us with their financial future. Open your account today
+                            and experience banking the way it should be.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-6 col-xl-5 order-xl-0 order-1">
+                    <div class="image-area d-rtl left-side wow zoomIn image-zoom-container" data-wow-delay="0.2s">
+                        <img src="{% static 'assets/images/global-payment-img.png' %}" alt="images" class="max-un">
+                    </div>
+                </div>
+                <div class="col-xxl-6 col-xl-7">
+                    <div class="row cus-mar">
+                        <div class="col-sm-6 col-6">
+                            <div class="single-item wow fadeInUp" data-wow-delay="0.1s">
+                                <img src="{% static 'assets/images/icon/global-payment-icon-1.png' %}" alt="icon">
+                                <h5>Secure Banking</h5>
+                                <p>Your deposits are FDIC insured up to the maximum allowed by law. Advanced security
+                                    measures, 24/7 monitoring, and instant account alerts keep your finances protected.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-6">
+                            <div class="single-item wow fadeInUp" data-wow-delay="0.2s">
+                                <img src="{% static 'assets/images/icon/global-payment-icon-2.png' %}" alt="icon">
+                                <h5>Business Banking</h5>
+                                <p>Comprehensive business accounts with expense tracking, corporate cards, and dedicated
+                                    relationship managers to support your company's growth.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-6">
+                            <div class="single-item wow fadeInUp" data-wow-delay="0.3s">
+                                <img src="{% static 'assets/images/icon/global-payment-icon-3.png' %}" alt="icon">
+                                <h5>Clear & Simple</h5>
+                                <p>Straightforward fee structure with no surprise charges. Access detailed statements,
+                                    spending insights, and transaction history anytime through online banking.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-6">
+                            <div class="single-item wow fadeInUp" data-wow-delay="0.4s">
+                                <img src="{% static 'assets/images/icon/global-payment-icon-4.png' %}" alt="icon">
+                                <h5>Community Focused</h5>
+                                <p>Banking that understands Roanoke. Local decision-making, personalized service, and
+                                    investment in our community's future through lending and partnerships.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Global Payment end -->
+
+<!-- Our Solutions start -->
+<section class="our-solutions">
+    <div class="overlay pt-120 pb-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-header dark-sec text-center">
+                        <h5 class="sub-title">Complete Banking Solutions</h5>
+                        <h2 class="title">Everything You Need Under One Roof</h2>
+                        <p>We've simplified banking with accounts, cards, loans, and investing tools designed for your
+                            financial goals. No complexity, just straightforward service.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row cus-mar">
+                <div class="col-xl-3 col-6">
+                    <div class="single-item wow zoomIn" data-wow-delay="0.1s">
+                        <img src="{% static 'assets/images/icon/our-solutions-icon-1.png' %}" alt="icon">
+                        <h5>Checking Accounts</h5>
+                        <p>No monthly fees, no minimum balance requirements. Unlimited debit card transactions, free ATM
+                            access, and mobile check deposit for total convenience.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-6">
+                    <div class="single-item wow zoomIn" data-wow-delay="0.2s">
+                        <img src="{% static 'assets/images/icon/our-solutions-icon-2.png' %}" alt="icon">
+                        <h5>Savings Accounts</h5>
+                        <p>Build wealth with competitive interest rates on your savings. Automatic transfers,
+                            goal-tracking tools, and 24/7 access to watch your money grow.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-6">
+                    <div class="single-item wow zoomIn" data-wow-delay="0.3s">
+                        <img src="{% static 'assets/images/icon/our-solutions-icon-3.png' %}" alt="icon">
+                        <h5>Personal Loans</h5>
+                        <p>Competitive rates, flexible terms, and fast approval. Whether you need funds for home
+                            improvements, debt consolidation, or major purchases, we're here to help.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-6">
+                    <div class="single-item">
+                        <img src="{% static 'assets/images/icon/our-solutions-icon-4.png' %}" alt="icon">
+                        <h5>Debit & Credit Cards</h5>
+                        <p>Earn rewards on every purchase with our cashback and points programs. Fraud protection, easy
+                            card management, and digital wallet integration for secure shopping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our Solutions end -->
+
+<!-- How it Works start -->
+<section class="how-it-works">
+    <div class="overlay pb-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-header text-center">
+                        <h5 class="sub-title">Getting Started</h5>
+                        <h2 class="title">Open Your Account Today</h2>
+                        <p>Banking with us is simple. Just 4 easy steps to get started</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row cus-mar">
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <div class="single-item first text-center">
+                        <img src="{% static 'assets/images/icon/how-works-icon-1.png' %}" alt="icon">
+                        <h5>Create Account</h5>
+                        <p>Sign up online in minutes and verify your identity with a valid ID</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <div class="single-item second text-center">
+                        <img src="{% static 'assets/images/icon/how-works-icon-2.png' %}" alt="icon">
+                        <h5>Choose Your Account</h5>
+                        <p>Select from checking, savings, or business accounts tailored to your needs</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <div class="single-item first text-center">
+                        <img src="{% static 'assets/images/icon/how-works-icon-3.png' %}" alt="icon">
+                        <h5>Fund Your Account</h5>
+                        <p>Make your initial deposit via transfer, mobile check, or direct deposit</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-6">
+                    <div class="single-item text-center">
+                        <img src="{% static 'assets/images/icon/how-works-icon-4.png' %}" alt="icon">
+                        <h5>Start Banking</h5>
+                        <p>Access your account online, mobile app, or ATMs nationwide — anytime, anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- How it Works end -->
+
+<!-- App Download start -->
+<section class="app-download">
+    <div class="overlay pb-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-lg-6 order-lg-0 order-1">
+                    <div class="image-area d-rtl left-side">
+                        <img src="{% static 'assets/images/app-download-img.png' %}" alt="images" class="max-un">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="section-area">
+                        <h5 class="sub-title">App Download</h5>
+                        <h2 class="title">Fast, Secure Money Transfers</h2>
+                        <p>Access your account via your mobile phone. View balance, transfer funds, view transactions
+                            wherever you are.</p>
+                    </div>
+                    <ul class="features">
+                        <li>
+                            <img src="{% static 'assets/images/icon/check.png' %}" alt="icon"> Login with fingerprint or
+                            Face ID.
+                        </li>
+                        <li>
+                            <img src="{% static 'assets/images/icon/check.png' %}" alt="icon"> Simple few Taps to send
+                            money
+                        </li>
+                        <li>
+                            <img src="{% static 'assets/images/icon/check.png' %}" alt="icon"> View transaction history.
+                        </li>
+                        <li>
+                            <img src="{% static 'assets/images/icon/check.png' %}" alt="icon"> Get instant App
+                            notifications.
+                        </li>
+                    </ul>
+                    <div class="brand-area mt-40">
+                        <a href="javascript:void(0)">
+                            <img src="{% static 'assets/images/GooglePlay-btn.png' %}" alt="icon">
+                        </a>
+                        <a href="javascript:void(0)">
+                            <img src="{% static 'assets/images/apple-btn.png' %}" alt="icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- App Download end -->
+
+<!-- Testimonials start -->
+<section class="testimonials">
+    <div class="overlay pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-header text-center">
+                        <h5 class="sub-title">Testimonials</h5>
+                        <h2 class="title">What Our Customers Say</h2>
+                        <p>245m+ happy clients all around the world. Don’t just take our word for it</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid wow fadeInUp">
+            <div class="testimonials-carousel">
+                <div class="single-slide">
+                    <div class="single-content">
+                        <div class="start-area">
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                        </div>
+                        <h5 class="title-area">Banking Made Personal</h5>
+                        <p class="xlr">"I've been banking with MyRoanokeHeritage Bank for over 5 years, and their
+                            checking account with no monthly fees has saved me hundreds. The mobile app makes managing
+                            my finances effortless."
+                        </p>
+                        <div class="profile-area d-flex align-items-center">
+                            <div class="icon-area">
+                                <img src="{% static 'assets/images/testimonials-img-1.png' %}" alt="icon">
+                            </div>
+                            <div class="text-area">
+                                <h5>Aspen Press</h5>
+                                <p>Web Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-slide">
+                    <div class="single-content">
+                        <div class="start-area">
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                        </div>
+                        <h5 class="title-area">Perfect Partner for Small Business</h5>
+                        <p class="xlr">"Switching our business accounts to MyRoanokeHeritage Bank was the best decision
+                            we made. Their business checking with free ACH transfers and merchant services helps us run
+                            smoothly every day."</p>
+                        <div class="profile-area d-flex align-items-center">
+                            <div class="icon-area">
+                                <img src="{% static 'assets/images/testimonials-img-2.png' %}" alt="icon">
+                            </div>
+                            <div class="text-area">
+                                <h5>Courtney Henry</h5>
+                                <p>Balance Studio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-slide">
+                    <div class="single-content">
+                        <div class="start-area">
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                        </div>
+                        <h5 class="title-area">Trusted for Business Growth</h5>
+                        <p class="xlr">"When we needed a business loan to expand, MyRoanokeHeritage Bank worked with us
+                            every step of the way. Their local service and competitive rates made the difference for our
+                            company."</p>
+                        <div class="profile-area d-flex align-items-center">
+                            <div class="icon-area">
+                                <img src="{% static 'assets/images/testimonials-img-3.png' %}" alt="icon">
+                            </div>
+                            <div class="text-area">
+                                <h5>Paul Howell</h5>
+                                <p>President of Sales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="single-slide">
+                    <div class="single-content">
+                        <div class="start-area">
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                            <a href="javascript:void(0)"><i class="fas fa-star"></i></a>
+                        </div>
+                        <h5 class="title-area">Great Rates, Better Service</h5>
+                        <p class="xlr">"MyRoanokeHeritage Bank's high-yield savings account helped me build an emergency
+                            fund faster than I expected. Their customer service team is always available when I need
+                            them. Highly recommended."</p>
+                        overseas payments."</p>
+                        <div class="profile-area d-flex align-items-center">
+                            <div class="icon-area">
+                                <img src="{% static 'assets/images/testimonials-img-2.png' %}" alt="icon">
+                            </div>
+                            <div class="text-area">
+                                <h5>Courtney Henry</h5>
+                                <p>Balance Studio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- App Download end -->
+
+<!-- FAQs In start -->
+<section class="faqs-section">
+    <div class="overlay pt-120 pb-120">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-7">
+                    <div class="section-header text-center">
+                        <h5 class="sub-title">Frequently Asked Questions</h5>
+                        <h2 class="title">Banking Questions Answered</h2>
+                        <p>Everything you need to know about opening and managing your account</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row cus-mar">
+                <div class="col-lg-6">
+                    <div class="accordion" id="accordionLeft">
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingLeftOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLeftOne" aria-expanded="false"
+                                    aria-controls="collapseLeftOne">
+                                    How do I open an account?
+                                </button>
+                            </h6>
+                            <div id="collapseLeftOne" class="accordion-collapse collapse"
+                                aria-labelledby="headingLeftOne" data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    <p>Opening an account is simple. Just visit our website or app, provide basic
+                                        information, verify your identity with a valid ID, and make an initial deposit.
+                                        You'll have full access to your account within 24 hours.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingLeftTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLeftTwo" aria-expanded="false"
+                                    aria-controls="collapseLeftTwo">
+                                    What's the difference between checking and savings accounts?
+                                </button>
+                            </h6>
+                            <div id="collapseLeftTwo" class="accordion-collapse collapse"
+                                aria-labelledby="headingLeftTwo" data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    <p>Checking accounts are designed for frequent transactions with no limits on
+                                        deposits or withdrawals. Savings accounts earn interest on your balance and are
+                                        ideal for building reserves. We offer both with no monthly fees and competitive
+                                        rates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingLeftThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLeftThree" aria-expanded="false"
+                                    aria-controls="collapseLeftThree">
+                                    Can I set up direct deposit for my paycheck?
+                                </button>
+                            </h6>
+                            <div id="collapseLeftThree" class="accordion-collapse collapse"
+                                aria-labelledby="headingLeftThree" data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    <p>Yes, absolutely. Direct deposit is free and takes just a few minutes to set up.
+                                        Provide your employer with your routing and account number, and your paycheck
+                                        will be automatically deposited each pay period — fast, secure, and reliable.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingLeftFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLeftFour" aria-expanded="false"
+                                    aria-controls="collapseLeftFour">
+                                    Can I get an ATM card and debit card?
+                                </button>
+                            </h6>
+                            <div id="collapseLeftFour" class="accordion-collapse collapse"
+                                aria-labelledby="headingLeftFour" data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    <p>Yes. All our checking accounts come with a free debit card for purchases and ATM
+                                        withdrawals. You'll have access to thousands of ATMs nationwide, plus our online
+                                        banking platform for 24/7 account management.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingLeftFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseLeftFive" aria-expanded="false"
+                                    aria-controls="collapseLeftFive">
+                                    Is my money FDIC insured?
+                                </button>
+                            </h6>
+                            <div id="collapseLeftFive" class="accordion-collapse collapse"
+                                aria-labelledby="headingLeftFive" data-bs-parent="#accordionLeft">
+                                <div class="accordion-body">
+                                    <p>Yes. Deposits are fully FDIC insured up to $250,000 per depositor, per account
+                                        category. This means your money is protected by the federal government, giving
+                                        you complete peace of mind.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="accordion" id="accordionRight">
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingRightOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRightOne" aria-expanded="false"
+                                    aria-controls="collapseRightOne">
+                                    What interest rates do you offer on savings?
+                                </button>
+                            </h6>
+                            <div id="collapseRightOne" class="accordion-collapse collapse"
+                                aria-labelledby="headingRightOne" data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    <p>Our savings accounts offer competitive APY rates that are updated regularly to
+                                        reflect market conditions. Visit our website for current rates, which are among
+                                        the best in the region for personal and business savings.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingRightTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRightTwo" aria-expanded="false"
+                                    aria-controls="collapseRightTwo">
+                                    Do you offer overdraft protection?
+                                </button>
+                            </h6>
+                            <div id="collapseRightTwo" class="accordion-collapse collapse"
+                                aria-labelledby="headingRightTwo" data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    <p>Yes. We offer optional overdraft protection that links your checking account to a
+                                        savings account or line of credit. If you overdraw, we'll automatically transfer
+                                        funds to prevent declined transactions and fees.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingRightThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRightThree" aria-expanded="false"
+                                    aria-controls="collapseRightThree">
+                                    Do you offer personal or home loans?
+                                </button>
+                            </h6>
+                            <div id="collapseRightThree" class="accordion-collapse collapse"
+                                aria-labelledby="headingRightThree" data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    <p>Yes. We offer personal loans, auto loans, and mortgage products with competitive
+                                        rates. Contact a loan officer to discuss your needs — we're here to help you
+                                        achieve your financial goals with flexible terms and fast approval.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingRightFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRightFour" aria-expanded="false"
+                                    aria-controls="collapseRightFour">
+                                    What online banking features do you offer?
+                                </button>
+                            </h6>
+                            <div id="collapseRightFour" class="accordion-collapse collapse"
+                                aria-labelledby="headingRightFour" data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    <p>Our online and mobile banking platform gives you 24/7 access to transfer funds,
+                                        pay bills, deposit checks via mobile, view statements, and manage account
+                                        settings. All transactions are secure and encrypted for your protection.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h6 class="accordion-header" id="headingRightFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseRightFive" aria-expanded="false"
+                                    aria-controls="collapseRightFive">
+                                    How can I reach customer support?
+                                </button>
+                            </h6>
+                            <div id="collapseRightFive" class="accordion-collapse collapse"
+                                aria-labelledby="headingRightFive" data-bs-parent="#accordionRight">
+                                <div class="accordion-body">
+                                    <p>Our customer service team is available by phone, email, and live chat Monday
+                                        through Friday. We're committed to responsive, friendly service to help you with
+                                        any questions or account needs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FAQs In end -->
+
+{% endblock content %}

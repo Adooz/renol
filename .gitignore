@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+*.env
+*.git
+*.DS_Store
+*.egg-info/
+.env
+
+# .gitignore
+venv/
+*.sqlite3
+__pycache__/
+*.pyc
+*.log
+*.zip
+*.tar.gz
+*.DS_Store
+media/
+staticfiles/

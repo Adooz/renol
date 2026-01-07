@@ -1,0 +1,1192 @@
+{% extends "partials/dashboard-base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+
+<style>
+    .quick-link-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #1f2937;
+        transition: all 0.3s ease;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .quick-link-item:hover {
+        background-color: #f0f4f8;
+        transform: translateX(4px);
+    }
+
+    .quick-link-item:hover i {
+        transform: scale(1.15);
+        transition: transform 0.3s ease;
+    }
+
+    /* Transaction Table Styling */
+    .table {
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
+    .table thead th {
+        background-color: #f9fafb;
+        border: none;
+        border-bottom: 2px solid #e5e7eb;
+        color: #6b7280;
+        font-weight: 600;
+        padding: 12px 16px;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    .table tbody tr {
+        border-bottom: 1px solid #f3f4f6;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f9fafb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .table tbody td {
+        padding: 14px 16px;
+        color: #1f2937;
+        vertical-align: middle;
+    }
+
+    .table tbody p {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .table tbody .mdr {
+        color: #9ca3af;
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 2px;
+    }
+
+    .table tbody .text-success {
+        color: #00a86b;
+        font-weight: 600;
+    }
+
+    .table tbody .inprogress {
+        color: #ff6b35;
+        font-weight: 600;
+    }
+
+    .table tbody .danger {
+        color: #ef4444;
+        font-weight: 600;
+    }
+
+    /* Status Badge Styling */
+    .text-success::before,
+    .inprogress::before,
+    .danger::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    .text-success::before {
+        background-color: #00a86b;
+    }
+
+    .inprogress::before {
+        background-color: #ff6b35;
+    }
+
+    .danger::before {
+        background-color: #ef4444;
+    }
+
+    /* Desktop & Mobile Responsiveness */
+    @media (min-width: 992px) {
+        .col-xl-9 {
+            padding-right: 12px;
+        }
+
+        .col-xl-3 {
+            padding-left: 12px;
+        }
+
+        /* Sidebar grid layout - 2 columns */
+        .side-items {
+            grid-template-columns: 1fr 1fr !important;
+            grid-auto-rows: max-content !important;
+        }
+
+        /* Items 1-3: Full width (span both columns) */
+        .side-items>.single-item:nth-child(1),
+        .side-items>.single-item:nth-child(2),
+        .side-items>.single-item:nth-child(3) {
+            grid-column: 1 / -1;
+        }
+
+        /* Items 4-5: Half width (side by side) */
+        .side-items>.single-item:nth-child(4) {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        .side-items>.single-item:nth-child(5) {
+            grid-column: 2;
+            grid-row: auto;
+        }
+
+        /* Stats side by side on desktop */
+        .mb-30 {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .mb-30 .col-md-6 {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .section-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .bottom-area {
+            grid-template-columns: 1fr 1fr !important;
+        }
+
+        /* Mobile: collapse sidebar grid to single column */
+        .side-items {
+            grid-template-columns: 1fr !important;
+        }
+
+        .side-items>.single-item:nth-child(1),
+        .side-items>.single-item:nth-child(2),
+        .side-items>.single-item:nth-child(3) {
+            grid-column: 1 !important;
+        }
+
+        .side-items>.single-item:nth-child(4),
+        .side-items>.single-item:nth-child(5) {
+            grid-column: 1 !important;
+        }
+
+        #servicesMenu {
+            right: auto !important;
+            left: 0 !important;
+        }
+
+        .mb-30 {
+            flex-direction: column !important;
+        }
+
+        .mb-30 .col-md-6 {
+            margin-bottom: 16px;
+        }
+    }
+
+    /* Services Menu Hover */
+    #servicesMenu a:hover {
+        background-color: #f0f4f8;
+        padding-left: 20px;
+    }
+
+    /* Action Button Hover */
+    .bottom-area a:hover,
+    .bottom-area button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* Sidebar Sticky on Desktop */
+    @media (min-width: 992px) {
+        .side-items {
+            position: sticky;
+            top: 80px;
+        }
+    }
+</style>
+
+<!-- Dashboard Section start -->
+<section class="dashboard-section body-collapse">
+    <div class="overlay pt-120">
+        <div class="container-fruid">
+            {% if form.errors %}
+            <div class="alert alert-danger">
+                <strong>{{form.errors}}</strong>
+            </div>
+            {% endif %}
+
+            <!-- KYC Warning Banner -->
+            {% if not kyc %}
+            <div class="alert alert-info alert-dismissible fade show mb-4" role="alert"
+                style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); border: 1px solid #90caf9; border-radius: 8px; padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas fa-info-circle" style="font-size: 20px; color: #1976d2;"></i>
+                    <div>
+                        <strong style="color: #1565c0;">KYC Verification Pending</strong>
+                        <p style="margin: 4px 0 0 0; color: #424242; font-size: 14px;">Complete your identity
+                            verification to unlock all banking features and higher transaction limits. <a
+                                href="{% url 'account:kyc-reg' %}"
+                                style="color: #1976d2; font-weight: 600; text-decoration: none;">Complete KYC →</a></p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            <div class="row" style="gap: 24px;">
+                <div class="col-xl-9 col-lg-8" style="margin-bottom: 30px;">
+                    <div class="section-content">
+                        <!-- Main Account Card -->
+                        <div class="acc-details"
+                            style="background: linear-gradient(135deg, #001a4d 0%, #003f87 50%, #0066cc 100%); color: white !important; padding: 48px; border-radius: 16px; margin-bottom: 30px; box-shadow: 0 12px 48px rgba(0, 26, 77, 0.25); position: relative; overflow: hidden;">
+                            <div
+                                style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%); pointer-events: none;">
+                            </div>
+                            <div style="position: relative; z-index: 1;">
+                                <div style="margin-bottom: 32px;">
+                                    <p
+                                        style="color: white !important; opacity: 0.85; font-size: 12px; margin: 0 0 12px 0; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                                        Available Balance</p>
+                                    <h2
+                                        style="color: white !important; margin: 0; font-size: 48px; font-weight: 700; letter-spacing: -1px; font-family: 'Trebuchet MS', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.2;">
+                                        ${{account.account_balance|intcomma}}</h2>
+                                </div>
+                                <div
+                                    style="display: flex; gap: 40px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.2);">
+                                    <div>
+                                        <p
+                                            style="color: rgba(255,255,255,0.75) !important; font-size: 10px; margin: 0 0 8px 0; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                                            Account Number</p>
+                                        <p
+                                            style="color: white !important; margin: 0; font-size: 16px; font-weight: 600; letter-spacing: 1.5px; font-family: 'Courier New', monospace;">
+                                            {{account.account_number}}</p>
+                                    </div>
+                                    <div>
+                                        <p
+                                            style="color: rgba(255,255,255,0.75) !important; font-size: 10px; margin: 0 0 8px 0; letter-spacing: 0.8px; text-transform: uppercase; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                                            Account Type</p>
+                                        <p
+                                            style="color: white !important; margin: 0; font-size: 16px; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                                            Checking</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="row mb-30">
+                            <div class="col-md-6 mb-3">
+                                <div
+                                    style="background: white; padding: 24px; border-radius: 12px; border-left: 5px solid #003f87; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                                    <p
+                                        style="color: #6b7280; font-size: 11px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">
+                                        Monthly Spending</p>
+                                    <h3 style="margin: 0; color: #003f87; font-size: 28px; font-weight: 600;">
+                                        ${{ sender_transaction|length|default:"0" }}
+                                    </h3>
+                                    <p style="margin: 8px 0 0 0; font-size: 13px; color: #6b7280;">Based on transfers
+                                        sent
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div
+                                    style="background: white; padding: 24px; border-radius: 12px; border-left: 5px solid #0066cc; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                                    <p
+                                        style="color: #6b7280; font-size: 11px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">
+                                        Total Received</p>
+                                    <h3 style="margin: 0; color: #0066cc; font-size: 28px; font-weight: 600;">
+                                        ${{ reciever_transaction|length|default:"0" }}
+                                    </h3>
+                                    <p style="margin: 8px 0 0 0; font-size: 13px; color: #6b7280;">Incoming transfers
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="bottom-area"
+                            style="background: white; padding: 24px; border-radius: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; margin-bottom: 30px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+                            <a href="{% url 'core:search-account' %}" class="cmn-btn"
+                                style="background: linear-gradient(135deg, #003f87 0%, #0066cc 100%); padding: 18px 12px; text-align: center; border-radius: 10px; color: white; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                <i class="fas fa-arrow-right" style="font-size: 18px;"></i>
+                                <span style="font-size: 13px;">Transfer</span>
+                            </a>
+                            <a href="{% url 'core:request-search-account' %}" class="cmn-btn"
+                                style="background: linear-gradient(135deg, #00a86b 0%, #00c073 100%); padding: 18px 12px; text-align: center; border-radius: 10px; color: white; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                                <i class="fas fa-arrow-left" style="font-size: 18px;"></i>
+                                <span style="font-size: 13px;">Request</span>
+                            </a>
+                            <div style="position: relative;">
+                                <button id="servicesBtn" class="cmn-btn"
+                                    style="width: 100%; background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%); padding: 18px 12px; text-align: center; border-radius: 10px; color: white; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 8px; border: none; cursor: pointer;">
+                                    <i class="fas fa-cog" style="font-size: 18px;"></i>
+                                    <span style="font-size: 13px;">Services</span>
+                                </button>
+                                <div id="servicesMenu"
+                                    style="position: absolute; top: 100%; right: 0; margin-top: 8px; background: white; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); min-width: 220px; z-index: 1000; display: none;">
+                                    <div style="padding: 12px 0; border-bottom: 2px solid #e5e7eb;">
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer;">
+                                            <i class="fas fa-file-invoice-dollar"
+                                                style="color: #ff6b35; margin-right: 10px; width: 16px;"></i>Pay Bills
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer;">
+                                            <i class="fas fa-mobile-alt"
+                                                style="color: #0066cc; margin-right: 10px; width: 16px;"></i>Mobile
+                                            Top-up
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer;">
+                                            <i class="fas fa-water"
+                                                style="color: #00a86b; margin-right: 10px; width: 16px;"></i>Utilities
+                                            Payment
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer; border-bottom: 1px solid #e5e7eb;">
+                                            <i class="fas fa-ticket-alt"
+                                                style="color: #9333ea; margin-right: 10px; width: 16px;"></i>Travel &
+                                            Entertainment
+                                        </a>
+                                    </div>
+                                    <div style="padding: 12px 0; border-bottom: 2px solid #e5e7eb;">
+                                        <a href="{% url 'core:transactions' %}"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer;">
+                                            <i class="fas fa-history"
+                                                style="color: #0066cc; margin-right: 10px; width: 16px;"></i>View All
+                                            Transactions
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer; border-bottom: 1px solid #e5e7eb;">
+                                            <i class="fas fa-credit-card"
+                                                style="color: #00a86b; margin-right: 10px; width: 16px;"></i>Card
+                                            Management
+                                        </a>
+                                    </div>
+                                    <div style="padding: 12px 0;">
+                                        <a href="{% url 'account:account' %}"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer; border-bottom: 1px solid #e5e7eb;">
+                                            <i class="fas fa-cog"
+                                                style="color: #003f87; margin-right: 10px; width: 16px;"></i>Account
+                                            Settings
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                            style="display: block; padding: 12px 16px; color: #1f2937; text-decoration: none; font-size: 13px; transition: all 0.3s ease; cursor: pointer;">
+                                            <i class="fas fa-headset"
+                                                style="color: #ff6b35; margin-right: 10px; width: 16px;"></i>Support &
+                                            Help
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            document.getElementById('servicesBtn').addEventListener('click', function (e) {
+                                e.stopPropagation();
+                                const menu = document.getElementById('servicesMenu');
+                                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+                            });
+                            document.addEventListener('click', function () {
+                                document.getElementById('servicesMenu').style.display = 'none';
+                            });
+                            document.getElementById('servicesMenu').addEventListener('click', function (e) {
+                                e.stopPropagation();
+                            });
+                        </script>
+                        <!-- Recent Transactions Section -->
+                        <div class="transactions-area"
+                            style="background: white; padding: 28px; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+                            <div class="section-text" style="margin-bottom: 24px;">
+                                <h5
+                                    style="margin: 0 0 8px 0; color: #1f2937; font-size: 20px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                                    Recent Activity</h5>
+                                <p style="margin: 0; color: #6b7280; font-size: 14px;">Transaction history from the last
+                                    30 days</p>
+                            </div>
+                            <div class="top-area d-flex align-items-center justify-content-between"
+                                style="margin-top: 20px; margin-bottom: 24px;">
+                                <div>
+                                    <ul class="nav nav-tabs" role="tablist" style="border-bottom: 2px solid #e5e7eb;">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="latest-tab" data-bs-toggle="tab"
+                                                data-bs-target="#latest" type="button" role="tab" aria-controls="latest"
+                                                aria-selected="true"
+                                                style="color: #003f87; border: none; padding: 12px 16px; font-weight: 600; border-bottom: 3px solid #003f87;">Sent</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="upcoming-tab" data-bs-toggle="tab"
+                                                data-bs-target="#upcoming" type="button" role="tab"
+                                                aria-controls="upcoming" aria-selected="false"
+                                                style="color: #6b7280; border: none; padding: 12px 16px; font-weight: 600; border-bottom: 3px solid transparent;">Received</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="sender-request-tab" data-bs-toggle="tab"
+                                                data-bs-target="#sender-request" type="button" role="tab"
+                                                aria-controls="upcoming" aria-selected="false"
+                                                style="color: #6b7280; border: none; padding: 12px 16px; font-weight: 600; border-bottom: 3px solid transparent;">Requests</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            Received</button>
+                            </li>
+                            </ul>
+                        </div>
+                        <div class="view-all d-flex align-items-center">
+                            <a href="{% url 'core:transactions' %}"
+                                style="color: #003f87; text-decoration: none; font-weight: 600; font-size: 13px; transition: all 0.3s ease; display: flex; align-items: center; gap: 4px;">View
+                                All
+                                <i class="fas fa-arrow-right" style="font-size: 11px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="tab-content mt-40">
+                        <div class="tab-pane fade show active" id="latest" role="tabpanel" aria-labelledby="latest-tab">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name/ Business</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for s in sender_transaction %}
+                                        <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                            <th scope="row">
+                                                <p>{{s.reciever.kyc.full_name|title}}</p>
+                                                <p class="mdr">{{s.transaction_type|title}}</p>
+                                            </th>
+                                            <td>
+                                                <p><small>{{s.date|date:"h:i"}}</small></p>
+                                                <p class="mdr">{{s.date|date:"d M, Y"}}</p>
+                                            </td>
+                                            <td>
+                                                {% if s.status == 'completed' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'pending' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'failed' %}
+                                                <p class="danger">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <p>-${{s.amount|intcomma}}</p>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}"
+                                                    class=""><i class="fas fa-eye"></i></a>
+
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name/ Business</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for s in reciever_transaction %}
+                                        <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                            <th scope="row">
+                                                <p>{{s.sender.kyc.full_name|title}}</p>
+                                                <p class="mdr">{{s.transaction_type|title}}</p>
+                                            </th>
+                                            <td>
+                                                <p><small>{{s.date|date:"h:i"}}</small></p>
+                                                <p class="mdr">{{s.date|date:"d M, Y"}}</p>
+                                            </td>
+                                            <td>
+                                                {% if s.status == 'completed' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'pending' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'failed' %}
+                                                <p class="danger">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <p>+${{s.amount|intcomma}}</p>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}"
+                                                    class=""><i class="fas fa-eye"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="sender-request" role="tabpanel"
+                            aria-labelledby="sender-request-tab">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name/ Business</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for s in request_sender_transaction %}
+                                        <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                            <th scope="row">
+                                                <p>{{s.reciever.kyc.full_name|title}}</p>
+                                                <p class="mdr">{{s.transaction_type|title}}</p>
+                                            </th>
+                                            <td>
+                                                <p><small>{{s.date|date:"h:i"}}</small></p>
+                                                <p class="mdr">{{s.date|date:"d M, Y"}}</p>
+                                            </td>
+                                            <td>
+                                                {% if s.status == 'completed' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'pending' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'failed' %}
+                                                <p class="danger">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_sent' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_settled' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <p>+${{s.amount|intcomma}}</p>
+                                            </td>
+                                            <td>
+                                                {% if s.status == "request_sent" %}
+                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}"
+                                                    class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                                                <a href="{% url 'core:delete-request' s.sender.account.account_number s.transaction_id %}"
+                                                    class=" btn btn-danger"> <i class="fas fa-x"></i> Delete</a>
+                                                {% endif %}
+
+                                                {% if s.status == "request_processing" %}
+                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}"
+                                                    class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                                                <a href="{% url 'core:delete-request' s.sender.account.account_number s.transaction_id %}"
+                                                    class=" btn btn-danger"> <i class="fas fa-x"></i> Delete</a>
+                                                {% endif %}
+
+                                                {% if s.status == "request_settled" %}
+                                                <a class="btn btn-success"><i class="fas fa-check-circle"></i>
+                                                    Settled</a>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reciever-request" role="tabpanel"
+                            aria-labelledby="reciever-request-tab">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name/ Business</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {% for s in request_reciever_transaction %}
+                                        <tr data-bs-toggle="modal" data-bs-target="#transactionsMod">
+                                            <th scope="row">
+                                                <p>{{s.sender.kyc.full_name|title}}</p>
+                                                <p class="mdr">{{s.transaction_type|title}}</p>
+                                            </th>
+                                            <td>
+                                                <p><small>{{s.date|date:"h:i"}}</small></p>
+                                                <p class="mdr">{{s.date|date:"d M, Y"}}</p>
+                                            </td>
+                                            <td>
+                                                {% if s.status == 'completed' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'pending' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'failed' %}
+                                                <p class="danger">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_sent' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_settled' %}
+                                                <p class="text-success">{{s.status|title}}</p>
+                                                {% endif %}
+                                                {% if s.status == 'request_processing' %}
+                                                <p class="inprogress">{{s.status|title}}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <p>+${{s.amount|intcomma}}</p>
+                                            </td>
+                                            <td>
+
+                                                {% if s.status == "request_sent" %}
+                                                <a href="{% url 'core:settlement-confirmation' s.sender.account.account_number s.transaction_id %}"
+                                                    class="btn btn-primary"><i class="fas fa-check-circle"></i>
+                                                    Settle</a>
+                                                <a href="{% url 'core:transaction-detail' s.transaction_id %}"
+                                                    class=" btn btn-danger"> <i class="fas fa-x"></i> Cancel</a>
+                                                {% endif %}
+
+                                                {% if s.status == "request_settled" %}
+                                                <a href="" class="btn btn-success"><i class="fas fa-check-circle"></i>
+                                                    Settled</a>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <li>No Received Requests</li>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4" style="display: flex; flex-direction: column;">
+            <div class="side-items"
+                style="flex: 1; display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; align-items: start !important; grid-auto-rows: max-content !important;">
+                <!-- Quick Stats Widget -->
+                <div class="single-item"
+                    style="grid-column: 1 / -1 !important; background: linear-gradient(135deg, #f0f4f8 0%, #f8f9fa 100%); padding: 20px; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-left: 4px solid #003f87;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <p
+                                style="margin: 0 0 8px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">
+                                This Month</p>
+                            <p style="margin: 0; color: #003f87; font-size: 22px; font-weight: 700;">$0.00</p>
+                            <p style="margin: 4px 0 0 0; color: #6b7280; font-size: 12px;">Sent</p>
+                        </div>
+                        <div>
+                            <p
+                                style="margin: 0 0 8px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">
+                                Total Received</p>
+                            <p style="margin: 0; color: #00a86b; font-size: 22px; font-weight: 700;">$0.00</p>
+                            <p style="margin: 4px 0 0 0; color: #6b7280; font-size: 12px;">Incoming</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Security Widget -->
+                <div class="single-item"
+                    style="grid-column: 1 / -1 !important; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <div
+                        style="display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 2px solid #e5e7eb;">
+                        <div
+                            style="width: 40px; height: 40px; background: linear-gradient(135deg, #003f87 0%, #0066cc 100%); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h6 style="margin: 0; color: #1f2937; font-weight: 700; font-size: 14px;">Account Security
+                            </h6>
+                            <p style="margin: 2px 0 0 0; color: #6b7280; font-size: 11px;">3 of 4 steps</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        <div style="margin-bottom: 12px;">
+                            <div
+                                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                <p style="margin: 0; font-size: 12px; color: #1f2937; font-weight: 600;">Security Score
+                                </p>
+                                <p style="margin: 0; font-size: 12px; color: #00a86b; font-weight: 700;">75%</p>
+                            </div>
+                            <div
+                                style="width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden;">
+                                <div
+                                    style="width: 75%; height: 100%; background: linear-gradient(90deg, #00a86b 0%, #00c073 100%);">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 8px; margin: 12px 0; padding: 10px; background: #f0f4f8; border-radius: 8px;">
+                            <i class="fas fa-exclamation-circle" style="color: #ff9800; font-size: 14px;"></i>
+                            <p style="margin: 0; font-size: 11px; color: #6b7280;"><strong>Enable 2FA</strong> to
+                                strengthen security</p>
+                        </div>
+                        <a href="javascript:void(0)"
+                            style="display: inline-block; margin-top: 8px; color: #003f87; font-weight: 600; text-decoration: none; font-size: 13px;">
+                            <i class="fas fa-cog"></i> Security Settings →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- My Cards Widget -->
+                <div class="single-item"
+                    style="grid-column: 1 / -1 !important; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 2px solid #e5e7eb;">
+                        <div>
+                            <h6 style="margin: 0; color: #1f2937; font-weight: 700; font-size: 14px;">
+                                <i class="fas fa-credit-card" style="color: #003f87; margin-right: 8px;"></i>
+                                My Cards ({{credit_card.count}})
+                            </h6>
+                        </div>
+                        <button type="button" class="cmn-btn" data-bs-toggle="modal" data-bs-target="#addcardMod"
+                            style="padding: 6px 12px; font-size: 12px; background: linear-gradient(135deg, #003f87 0%, #0066cc 100%); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">+
+                            Add</button>
+                    </div>
+                    <div style="margin-top: 16px;">
+                        {% if credit_card.count > 0 %}
+                        <div style="max-height: 250px; overflow-y: auto;">
+                            {% for c in credit_card %}
+                            <a href="{% url 'core:card-detail' c.card_id %}"
+                                style="display: block; margin-bottom: 12px; padding: 12px; background: linear-gradient(135deg, #f8f9fa 0%, #f0f4f8 100%); border-radius: 8px; text-decoration: none; transition: all 0.3s ease; border-left: 4px solid #003f87; cursor: pointer;">
+                                <p style="margin: 0 0 4px 0; font-weight: 600; color: #1f2937; font-size: 13px;">
+                                    {{c.name}}</p>
+                                <p
+                                    style="margin: 0; color: #6b7280; font-size: 12px; font-family: 'Courier New', monospace;">
+                                    •••• {{c.number|slice:"-4:"}}</p>
+                            </a>
+
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p style="font-size: 13px; color: #9ca3af; margin: 0; text-align: center; padding: 24px 0;">
+                            <i class="fas fa-credit-card"
+                                style="opacity: 0.4; font-size: 24px; display: block; margin-bottom: 8px;"></i>
+                            No cards yet
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="single-item"
+                    style="grid-column: 1 !important; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <h6 style="margin: 0 0 16px 0; color: #1f2937; font-weight: 700; font-size: 14px;">
+                        <i class="fas fa-link" style="color: #003f87; margin-right: 8px;"></i>
+                        Quick Links
+                    </h6>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <a href="{% url 'account:account' %}" class="quick-link-item">
+                            <i class="fas fa-user-circle" style="color: #003f87; width: 20px;"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="{% url 'core:transactions' %}" class="quick-link-item">
+                            <i class="fas fa-exchange-alt" style="color: #0066cc; width: 20px;"></i>
+                            <span>All Transactions</span>
+                        </a>
+                        <a href="javascript:void(0)" class="quick-link-item">
+                            <i class="fas fa-shield-alt" style="color: #00a86b; width: 20px;"></i>
+                            <span>Security & Privacy</span>
+                        </a>
+                        <a href="{% url 'account:kyc-reg' %}" class="quick-link-item"
+                            style="{% if kyc %}opacity: 0.6; cursor: default;{% endif %}">
+                            <i class="fas fa-id-card" style="color: #ff6b35; width: 20px;"></i>
+                            <span>KYC Verification {% if kyc %}<span
+                                    style="color: #00a86b; font-weight: 600;">(Verified)</span>{% endif %}</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recent Notifications -->
+                <div class="single-item"
+                    style="grid-column: 2 !important; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px;">
+                        <h6 style="margin: 0; color: #1f2937; font-weight: 700; font-size: 14px;">
+                            <i class="fas fa-bell" style="color: #ff6b35; margin-right: 8px;"></i>
+                            Alerts ({{notifications.count}})
+                        </h6>
+                        <a href="javascript:void(0)"
+                            style="font-size: 12px; color: #003f87; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">View
+                            All</a>
+                    </div>
+                    <div style="margin-top: 12px; max-height: 300px; overflow-y: auto;">
+                        {% if notifications %}
+                        {% for n in notifications|slice:":5" %}
+                        <div
+                            style="padding: 12px; border-radius: 8px; background: #f9fafb; margin-bottom: 8px; border-left: 3px solid #003f87; font-size: 13px;">
+                            <p style="margin: 0 0 4px 0; color: #1f2937; line-height: 1.5; font-weight: 500;">
+                                {% if n.notification_type == "Credit Alert" %}
+                                <i class="fas fa-arrow-down" style="color: #00a86b; font-weight: bold;"></i>
+                                <span style="color: #00a86b; font-weight: 600;">Received</span> ${{n.amount}}
+                                {% elif n.notification_type == "Debit Alert" %}
+                                <i class="fas fa-arrow-up" style="color: #ff6b35; font-weight: bold;"></i>
+                                <span style="color: #ff6b35; font-weight: 600;">Sent</span> ${{n.amount}}
+                                {% elif n.notification_type == "Sent Payment Request" %}
+                                <i class="fas fa-question-circle" style="color: #ff6b35;"></i>
+                                <span>Payment request sent</span>
+                                {% elif n.notification_type == "Recieved Payment Request" %}
+                                <i class="fas fa-question-circle" style="color: #ff6b35;"></i>
+                                <span>Payment request received</span>
+                                {% else %}
+                                {{n.notification_type}}
+                                {% endif %}
+                            </p>
+                            <p style="margin: 0; color: #9ca3af; font-size: 12px;">{{n.date|date:"M d, Y"}}</p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p style="color: #9ca3af; font-size: 13px; text-align: center; padding: 32px 0; margin: 0;">
+                            <i class="fas fa-inbox"
+                                style="display: block; font-size: 24px; margin-bottom: 8px; opacity: 0.5;"></i>
+                            No notifications yet
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+<!-- Dashboard Section end -->
+
+<!-- Card Popup start -->
+<div class="card-popup">
+    <div class="container-fruid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="modal fade" id="cardMod" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-center">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <div class="main-content">
+                                <div class="top-area mb-40 mt-40 text-center">
+                                    <div class="card-area mb-30">
+                                        <img src="{% static 'assets1/images/visa-card-2.png' %}" alt="image">
+                                    </div>
+                                    <div class="text-area">
+                                        <h5>MyRoanokeHeritage Card </h5>
+                                        <p>Linked: 01 Jun 2021</p>
+                                    </div>
+                                </div>
+                                <div class="tab-area d-flex align-items-center justify-content-between">
+                                    <ul class="nav nav-tabs mb-30" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="btn-link" id="cancel-tab" data-bs-toggle="tab"
+                                                data-bs-target="#cancel" type="button" role="tab" aria-controls="cancel"
+                                                aria-selected="false">
+                                                <img src="{% static 'assets1/images/icon/limit.png' %}" alt="icon">
+                                                Set transfer limit
+                                            </button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="d-none" id="limit-tab" data-bs-toggle="tab"
+                                                data-bs-target="#limit" type="button" role="tab" aria-controls="limit"
+                                                aria-selected="true"></button>
+                                        </li>
+                                        <li>
+                                            <button>
+                                                <img src="{% static 'assets1/images/icon/remove.png' %}" alt="icon">
+                                                Remove from Linked
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content mt-30">
+                                    <div class="tab-pane fade show active" id="limit" role="tabpanel"
+                                        aria-labelledby="limit-tab">
+                                        <div class="bottom-area">
+                                            <p class="history">Transaction History : <span>20</span></p>
+                                            <ul>
+                                                <li>
+                                                    <p class="left">
+                                                        <span>03:00 PM</span>
+                                                        <span>17 Oct, 2020</span>
+                                                    </p>
+                                                    <p class="right">
+                                                        <span>$160.48</span>
+                                                        <span>Withdraw</span>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="left">
+                                                        <span>01:09 PM</span>
+                                                        <span>15 Oct, 2021</span>
+                                                    </p>
+                                                    <p class="right">
+                                                        <span>$106.58</span>
+                                                        <span>Withdraw</span>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="left">
+                                                        <span>04:00 PM</span>
+                                                        <span>12 Oct, 2020</span>
+                                                    </p>
+                                                    <p class="right">
+                                                        <span>$176.58</span>
+                                                        <span>Withdraw</span>
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="left">
+                                                        <span>06:00 PM</span>
+                                                        <span>25 Oct, 2020</span>
+                                                    </p>
+                                                    <p class="right">
+                                                        <span>$167.85</span>
+                                                        <span>Withdraw</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+                                        <div class="main-area">
+                                            <div class="transfer-area">
+                                                <p>Set a transfer limit for MyRoanokeHeritage Card</p>
+                                                <p class="mdr">Transfer Limit</p>
+                                            </div>
+                                            <form action="#">
+                                                <div class="input-area">
+                                                    <input class="xxlr" placeholder="400.00" type="number">
+                                                    <select>
+                                                        <option value="1">USD</option>
+                                                        <option value="2">USD</option>
+                                                        <option value="3">USD</option>
+                                                    </select>
+                                                </div>
+                                                <div
+                                                    class="bottom-area d-flex align-items-center justify-content-between">
+                                                    <a href="javascript:void(0)" class="cmn-btn cancel">Cancel and
+                                                        Back</a>
+                                                    <a href="javascript:void(0)" class="cmn-btn">Confirm Transfer
+                                                        Limit</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Card Popup start -->
+
+<!-- Add Card Popup start -->
+<div class="add-card">
+    <div class="container-fruid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="modal fade" id="addcardMod" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-between">
+                                <h6>Add Card</h6>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="single-input">
+                                            <label for="cardNumber">Card name</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.name}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="single-input">
+                                            <label for="cardNumber">Card Number</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.number}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <label for="cardNumber">Expiry Month</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.month}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <label for="cardNumber">Expiry Year</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.year}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <label for="cardNumber">CVV</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.cvv}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <label for="cardNumber">Card Type</label>
+                                            <!-- <input type="text" id="cardNumber" placeholder="5890 - 6858 - 6332 - 9843"> -->
+                                            {{form.card_type}}
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="btn-border w-100">
+                                            <button type="submit" class="cmn-btn w-100">Add Card</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Card Popup start -->
+
+<!-- Transactions Popup start -->
+<div class="transactions-popup">
+    <div class="container-fruid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="modal fade" id="transactionsMod" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-between">
+                                <h5>Transaction Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                        class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <div class="main-content">
+                                <div class="row">
+                                    <div class="col-sm-5 text-center">
+                                        <div class="icon-area">
+                                            <img src="{% static 'assets1/images/icon/transaction-details-icon.png' %}"
+                                                alt="icon">
+                                        </div>
+                                        <div class="text-area">
+                                            <h6>Envato Pty Ltd</h6>
+                                            <p>16 Jan 2022</p>
+                                            <h3>717.14 USD</h3>
+                                            <p class="com">Completed</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="right-area">
+                                            <h6>Transaction Details</h6>
+                                            <ul class="payment-details">
+                                                <li>
+                                                    <span>Payment Amount</span>
+                                                    <span>718.64 USD</span>
+                                                </li>
+                                                <li>
+                                                    <span>Fee</span>
+                                                    <span>1.50 USD</span>
+                                                </li>
+                                                <li>
+                                                    <span>Total Amount</span>
+                                                    <span>717.14 USD</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="payment-info">
+                                                <li>
+                                                    <p>Payment From</p>
+                                                    <span class="mdr">Envato Pty Ltd</span>
+                                                </li>
+                                                <li>
+                                                    <p>Payment Description</p>
+                                                    <span class="mdr">Envato Feb 2022 Member Payment</span>
+                                                </li>
+                                                <li>
+                                                    <p>Transaction ID:</p>
+                                                    <span class="mdr">6559595979565959895559595</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Transactions Popup start -->
+{% endblock content %}
