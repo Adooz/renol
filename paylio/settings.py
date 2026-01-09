@@ -31,13 +31,13 @@ SECRET_KEY = "django-insecure-&5arq9bhko6k2xk9c7qpt&1iyi7nh-i92le0-ekf*@j--pl3ul
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv(
     'ALLOWED_HOSTS',
-    'localhost,127.0.0.1,.up.railway.app'
+    'localhost,127.0.0.1,.up.railway.app,myroanokeheritage.com,www.myroanokeheritage.com'
 ).split(',')
 
 # Trust common proxy hostnames used in deployment by default; override via env.
 _csrf_trusted = os.getenv(
     'CSRF_TRUSTED_ORIGINS',
-    'https://*.up.railway.app,https://localhost,https://127.0.0.1'
+    'https://*.up.railway.app,https://localhost,https://127.0.0.1,https://myroanokeheritage.com,https://www.myroanokeheritage.com'
 )
 CSRF_TRUSTED_ORIGINS = [h.strip() for h in _csrf_trusted.split(',') if h.strip()]
 
