@@ -197,10 +197,9 @@
                                             <a href="{% url 'account:account' %}">
                                                 <h5>{{kyc.full_name|title}}</h5>
                                             </a>
-                                            <p class="wallet-id"><small>Account No. {{
-                                                    request.user.account.account_number }}</small></p>
-                                            <p class="wallet-id"><small>Pin No. {{ request.user.account.pin_number
-                                                    }}</small></p>
+                                            <p class="wallet-id"><small>Account No. {{account.account_number}}</small>
+                                            </p>
+                                            <p class="wallet-id"><small>Pin No. {{account.pin_number}}</small></p>
                                         </div>
                                     </div>
                                     <ul>
