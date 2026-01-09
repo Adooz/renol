@@ -104,10 +104,14 @@ def kyc_registration(request):
             return redirect("account:account")
     else:
         form = KYCForm(instance=kyc)
+    
+    notifications = Notification.objects.filter(user=user).order_by("-id")[:5]
+    
     context = {
         "account": account,
         "form": form,
         "kyc": kyc,
+        "notifications": notifications,
     }
     return render(request, "account/kyc-form.html", context)
 
