@@ -29,10 +29,10 @@ SECRET_KEY = "django-insecure-&5arq9bhko6k2xk9c7qpt&1iyi7nh-i92le0-ekf*@j--pl3ul
 # SECURITY WARNING: don't run with debug turned on in production!
 # Make DEBUG and hosts configurable via environment for deployments.
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv(
+ALLOWED_HOSTS = [h.strip() for h in os.getenv(
     'ALLOWED_HOSTS',
     'localhost,127.0.0.1,.up.railway.app,myroanokeheritage.com,www.myroanokeheritage.com'
-).split(',')
+).split(',') if h.strip()]
 
 # Trust common proxy hostnames used in deployment by default; override via env.
 _csrf_trusted = os.getenv(
