@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 import os
 from core.views import AdminLogoutView  # Adjust if placed elsewhere
-
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -18,8 +18,9 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     path("user/", include("userauths.urls")),
-    path('account/', include('account.urls', namespace='account')), 
-   
+    path('account/', include('account.urls', namespace='account')),
+    path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml', content_type='application/xml')),
+    path('google3797164cdd298408.html', TemplateView.as_view(template_name='google3797164cdd298408.html', content_type='text/html')),
 
 ]
  
