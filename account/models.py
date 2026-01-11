@@ -48,6 +48,8 @@ class Account(models.Model):
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
     account_balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00) #123 345 789 102
     account_number = ShortUUIDField(unique=True,length=7, max_length=7, prefix="217", alphabet="1234567890") #2175893745837
+    # Short numeric access code shown on dashboard (6 digits)
+    access_code = ShortUUIDField(unique=True, length=6, max_length=6, alphabet="1234567890", null=True, blank=True)
     account_id = ShortUUIDField(unique=True,length=7, max_length=25, prefix="DEX", alphabet="1234567890") #2175893745837
     pin_number = ShortUUIDField(unique=True,length=4, max_length=7, prefix="", alphabet="1234567890") #2737
     red_code = ShortUUIDField(unique=True,length=10, max_length=20, prefix="", alphabet="abcdefgh1234567890") #2737
