@@ -1,4 +1,4 @@
-from django.db import migrations
+from django.db import migrations, models
 
 
 def generate_unique_code(existing):
@@ -36,5 +36,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='account',
+            name='access_code',
+            field=models.CharField(max_length=6, null=True, blank=True),
+        ),
         migrations.RunPython(forwards, reverse_code=reverse),
     ]
