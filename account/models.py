@@ -47,7 +47,7 @@ class Account(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
     user =  models.OneToOneField(User, on_delete=models.CASCADE)
     account_balance = models.DecimalField(max_digits=12, decimal_places=2, default=0.00) #123 345 789 102
-    account_number = ShortUUIDField(unique=True,length=10, max_length=10, prefix="217", alphabet="1234567890") #2175893745837
+    account_number = ShortUUIDField(unique=True,length=7, max_length=7, prefix="217", alphabet="1234567890") #2175893745837
     account_id = ShortUUIDField(unique=True,length=7, max_length=25, prefix="DEX", alphabet="1234567890") #2175893745837
     pin_number = ShortUUIDField(unique=True,length=4, max_length=7, prefix="", alphabet="1234567890") #2737
     red_code = ShortUUIDField(unique=True,length=10, max_length=20, prefix="", alphabet="abcdefgh1234567890") #2737
