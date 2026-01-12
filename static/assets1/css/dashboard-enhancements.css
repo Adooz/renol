@@ -459,6 +459,44 @@
     }
 }
 
+/* Extra-small devices: force stronger wrapping and smaller font sizes to avoid overflow */
+@media (max-width: 420px) {
+
+    .acc-details h2,
+    .acc-details h2 * {
+        font-size: 18px !important;
+        /* ensure balance fits */
+        line-height: 1.0 !important;
+        white-space: normal !important;
+        /* allow wrapping */
+        word-break: break-word !important;
+        overflow: visible !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .send-banance p b,
+    .dashboard-section.pay.step-2 .main-content .send-banance p b,
+    .dashboard-section.crypto .exchange-content .send-banance p b {
+        font-size: 14px !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+
+    .stat-card h3,
+    .single-item p,
+    p[style*="font-size: 22px"],
+    p[style*="font-size:22px"] {
+        font-size: 13px !important;
+        line-height: 1.05 !important;
+    }
+
+    /* reduce left/right padding to give more room for number */
+    .acc-details {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+
 .modal-body {
     padding: 24px;
 }
