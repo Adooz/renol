@@ -403,12 +403,18 @@
 @media (max-width: 576px) {
 
     /* generic selectors used across dashboard templates where balances are shown */
+    /* specifically target the Available Balance amount */
     .send-banance p b,
     .dashboard-section.pay.step-2 .main-content .send-banance p b,
-    .dashboard-section.crypto .exchange-content .send-banance p b,
+    .dashboard-section.crypto .exchange-content .send-banance p b {
+        font-size: 12px !important;
+        line-height: 1.1 !important;
+    }
+
+    /* headings smaller on very small screens */
     .acc-details h2,
     .stat-card h3 {
-        font-size: 16px !important;
+        font-size: 18px !important;
     }
 
     /* tighter spacing for mobile */

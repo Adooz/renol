@@ -315,7 +315,7 @@
                                         style="color: #6b7280; font-size: 11px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500;">
                                         Total Received</p>
                                     <h3 style="margin: 0; color: #0066cc; font-size: 28px; font-weight: 600;">
-                                        ${{ reciever_transaction|length|default:"0" }}
+                                        ${{ account.account_balance|intcomma }}
                                     </h3>
                                     <p style="margin: 8px 0 0 0; font-size: 13px; color: #6b7280;">Incoming transfers
                                     </p>
@@ -742,7 +742,8 @@
                             <p
                                 style="margin: 0 0 8px 0; color: #6b7280; font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">
                                 Total Received</p>
-                            <p style="margin: 0; color: #00a86b; font-size: 22px; font-weight: 700;">$0.00</p>
+                            <p style="margin: 0; color: #00a86b; font-size: 22px; font-weight: 700;">${{
+                                account.account_balance|intcomma }}</p>
                             <p style="margin: 4px 0 0 0; color: #6b7280; font-size: 12px;">Incoming</p>
                         </div>
                     </div>
