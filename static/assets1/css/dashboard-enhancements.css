@@ -407,20 +407,20 @@
     .send-banance p b,
     .dashboard-section.pay.step-2 .main-content .send-banance p b,
     .dashboard-section.crypto .exchange-content .send-banance p b {
-        font-size: 12px !important;
+        font-size: 7px !important;
         line-height: 1.1 !important;
     }
 
     /* headings smaller on very small screens */
     .acc-details h2,
     .stat-card h3 {
-        font-size: 18px !important;
+        font-size: 9px !important;
     }
 
     /* tighter spacing for mobile */
     .send-banance p,
     .acc-details p {
-        font-size: 12px !important;
+        font-size: 6px !important;
     }
 }
 
