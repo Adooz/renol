@@ -604,3 +604,41 @@ a:hover {
     color: var(--accent-blue);
     text-decoration: none;
 }
+
+/* Responsive balance / alignment fixes
+   - Ensure the big balance value scales on small screens and never overflows the container.
+   - Uses clamp() with !important to override inline template sizing when needed. */
+.acc-details,
+.acc-details * {
+    box-sizing: border-box;
+}
+
+.acc-details h2 {
+    /* scale between 20px and 48px depending on viewport width; override inline size */
+    font-size: clamp(20px, 6vw, 48px) !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    /* keep currency on one line but allow scaling */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.05 !important;
+}
+
+@media (max-width: 576px) {
+
+    /* tighten padding and reduce font-size further on very small phones */
+    .acc-details {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .acc-details h2 {
+        font-size: clamp(16px, 9vw, 34px) !important;
+        line-height: 1.05 !important;
+    }
+
+    /* ensure quick-stats and sidebar widgets also remain readable */
+    .stat-card h3 {
+        font-size: clamp(16px, 6vw, 28px) !important;
+    }
+}
