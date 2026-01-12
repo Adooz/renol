@@ -38,19 +38,25 @@ def LoginView(request):
         identifier = request.POST.get("username") or request.POST.get("email")
         password = request.POST.get("password")
 
-        # Try authenticate with username first (preferred), then with email
-        user = authenticate(request, username=identifier, password=password)
-        if user is None:
-            # some backends use email as the USERNAME_FIELD; try passing email
-            user = authenticate(request, email=identifier, password=password)
+        # The custom User model uses `USERNAME_FIELD='email'`.
+        # If the identifier is actually a username, look up that user and
+        # authenticate using their email (the USERNAME_FIELD). Otherwise
+        # try authenticating directly with the identifier (email).
+        user = None
+        try:
+            username_user = User.objects.get(username=identifier)
+            # authenticate using the user's email since that's the USERNAME_FIELD
+            user = authenticate(request, username=username_user.email, password=password)
+        except User.DoesNotExist:
+            # identifier wasn't a username; try treating it as the email/username field
+            user = authenticate(request, username=identifier, password=password)
 
         if user is not None:
             login(request, user)
             messages.success(request, "You are logged.")
             return redirect("account:account")
-        else:
-            messages.warning(request, "Username/email or password does not exist")
-            return redirect("userauths:sign-in")
+        messages.warning(request, "Username/email or password does not exist")
+        return redirect("userauths:sign-in")
 
     if request.user.is_authenticated:
         messages.warning(request, "You are already logged In")
