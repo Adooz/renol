@@ -399,6 +399,25 @@
     font-weight: 700;
 }
 
+/* Reduce account balance font-size on small screens */
+@media (max-width: 576px) {
+
+    /* generic selectors used across dashboard templates where balances are shown */
+    .send-banance p b,
+    .dashboard-section.pay.step-2 .main-content .send-banance p b,
+    .dashboard-section.crypto .exchange-content .send-banance p b,
+    .acc-details h2,
+    .stat-card h3 {
+        font-size: 16px !important;
+    }
+
+    /* tighter spacing for mobile */
+    .send-banance p,
+    .acc-details p {
+        font-size: 12px !important;
+    }
+}
+
 .modal-body {
     padding: 24px;
 }
