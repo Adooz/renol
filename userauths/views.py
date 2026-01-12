@@ -34,22 +34,23 @@ def RegisterView(request):
 
 def LoginView(request):
     if request.method == "POST":
-        email = request.POST.get("email")
+        # Accept either username or email as the identifier for compatibility
+        identifier = request.POST.get("username") or request.POST.get("email")
         password = request.POST.get("password")
 
-        try:
-            user = User.objects.get(email=email)
-            user = authenticate(request, email=email, password=password)
+        # Try authenticate with username first (preferred), then with email
+        user = authenticate(request, username=identifier, password=password)
+        if user is None:
+            # some backends use email as the USERNAME_FIELD; try passing email
+            user = authenticate(request, email=identifier, password=password)
 
-            if user is not None: # if there is a user
-                login(request, user)
-                messages.success(request, "You are logged.")
-                return redirect("account:account")
-            else:
-                messages.warning(request, "Username or password does not exist")
-                return redirect("userauths:sign-in")
-        except:
-            messages.warning(request, "User does not exist")
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You are logged.")
+            return redirect("account:account")
+        else:
+            messages.warning(request, "Username/email or password does not exist")
+            return redirect("userauths:sign-in")
 
     if request.user.is_authenticated:
         messages.warning(request, "You are already logged In")
