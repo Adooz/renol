@@ -80,31 +80,27 @@
                                                 <div class="text-area">
 
                                                     {% if n.notification_type == "Credit Alert" %}
-                                                    <p class="mdr">You received a payment of <b>$<span
-                                                                class="incoming-balance">{{ n.amount }}</span></b></p>
+                                                    <p class="mdr">You received a payment of <b>${{n.amount}}</b></p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Debit Alert" %}
-                                                    <p class="mdr">You sent a payment of <b>$<span
-                                                                class="incoming-balance">{{ n.amount }}</span></b></p>
+                                                    <p class="mdr">You sent a payment of <b>${{n.amount}}</b></p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Sent Payment Request" %}
                                                     <p class="mdr">You sent a <b>payment request</b> of
-                                                        <b>$<span class="incoming-balance">{{ n.amount }}</span></b>
+                                                        <b>${{n.amount}}</b>
                                                     </p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Recieved Payment Request" %}
                                                     <p class="mdr">You received a <b>payment request</b> of
-                                                        <b>$<span class="incoming-balance">{{ n.amount }}</span></b>
+                                                        <b>${{n.amount}}</b>
                                                     </p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Funded Credit Card" %}
-                                                    <p class="mdr">You funded your credit card with <b>$<span
-                                                                class="incoming-balance">{{ n.amount }}</span></b>
+                                                    <p class="mdr">You funded your credit card with <b>${{n.amount}}</b>
                                                     </p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Withdrew Credit Card Funds" %}
-                                                    <p class="mdr">You withdrew <b>$<span class="incoming-balance">{{
-                                                                n.amount }}</span></b> from your credit
+                                                    <p class="mdr">You withdrew <b>${{n.amount}}</b> from your credit
                                                         card</p>
                                                     {% endif %}
                                                     {% if n.notification_type == "Deleted Credit Card" %}
