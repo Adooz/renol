@@ -6,9 +6,9 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class KYCForm(forms.ModelForm):
-    identity_image = ImageField(widget=FileInput)
-    image = ImageField(widget=FileInput)
-    signature = ImageField(widget=FileInput)
+    identity_image = ImageField(widget=FileInput, required=False)
+    image = ImageField(widget=FileInput, required=False)
+    signature = ImageField(widget=FileInput, required=False)
 
     class Meta:
         model = KYC
