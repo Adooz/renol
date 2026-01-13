@@ -59,13 +59,6 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* styling for numeric span used across templates to hold the balance value */
-.incoming-balance {
-    font-family: 'Courier New', monospace !important;
-    font-size: inherit !important;
-    letter-spacing: 1.2px !important;
-}
-
 .acc-details p {
     font-size: 8px;
     letter-spacing: 0.3px;
@@ -734,7 +727,10 @@ a:hover {
     margin: 0 0 6px 0 !important;
     color: white !important;
     line-height: 1.2 !important;
-    /* allow wrapping on small screens; media queries below will enforce single-line on larger viewports */
+    white-space: nowrap !important;
+    /* keep the balance on a single compact line */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 /* If you prefer the balance to wrap on very small screens, the rule below can be enabled instead:
@@ -742,12 +738,3 @@ a:hover {
     .acc-details h2 { white-space: normal !important; font-size: 14px !important; }
 }
 */
-
-/* On larger screens keep the balance as a single compact line */
-@media (min-width: 577px) {
-    .acc-details h2 {
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-}
