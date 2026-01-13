@@ -715,3 +715,26 @@ a:hover {
         font-size: clamp(16px, 6vw, 28px) !important;
     }
 }
+
+/* Force Available Balance to match Account Number / Account Type visual style */
+/* Uses !important to override inline template sizing so the balance appears compact and aligned */
+.acc-details h2 {
+    font-family: 'Courier New', monospace !important;
+    font-size: 16px !important;
+    /* match account number size */
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 0 6px 0 !important;
+    color: white !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    /* keep the balance on a single compact line */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* If you prefer the balance to wrap on very small screens, the rule below can be enabled instead:
+@media (max-width: 360px) {
+    .acc-details h2 { white-space: normal !important; font-size: 14px !important; }
+}
+*/
