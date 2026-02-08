@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name example.com www.example.com;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        alias /opt/renol/app/staticfiles/;
+    }
+
+    location /media/ {
+        alias /opt/renol/app/media/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/renol.sock;
+    }
+}

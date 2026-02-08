@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon for renol Django app
+After=network.target
+
+[Service]
+User=renol
+Group=www-data
+WorkingDirectory=/opt/renol/app
+EnvironmentFile=/opt/renol/app/.env
+ExecStart=/opt/renol/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/renol.sock paylio.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
