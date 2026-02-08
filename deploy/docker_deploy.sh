@@ -13,6 +13,7 @@ APP_DIR=/opt/${APP_NAME}
 REPO_URL="https://github.com/Adooz/renol.git"
 BRANCH=main
 SITE_DOMAIN=""
+PRODUCTION=false
 COPY_LOCAL=false
 ENABLE_HTTPS=false
 SKIP_DOCKER_INSTALL=false
@@ -42,11 +43,12 @@ fi
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --repo) REPO_URL="$2"; shift 2;;
-    --branch) BRANCH="$2"; shift 2;;
-    --local) COPY_LOCAL=true; shift 1;;
-    --domain) SITE_DOMAIN="$2"; shift 2;;
-    --https) ENABLE_HTTPS=true; shift 1;;
-    --skip-docker-install) SKIP_DOCKER_INSTALL=true; shift 1;;
+  --branch) BRANCH="$2"; shift 2;;
+  --local) COPY_LOCAL=true; shift 1;;
+  --domain) SITE_DOMAIN="$2"; shift 2;;
+  --https) ENABLE_HTTPS=true; shift 1;;
+  --prod) PRODUCTION=true; shift 1;;
+  --skip-docker-install) SKIP_DOCKER_INSTALL=true; shift 1;;
     --superuser-email) SUPERUSER_EMAIL="$2"; shift 2;;
     --superuser-pass) SUPERUSER_PASSWORD="$2"; shift 2;;
     -h|--help) print_usage; exit 0;;
@@ -107,7 +109,7 @@ SECRET_KEY=${SECKEY}
 DEBUG=False
 ALLOWED_HOSTS=${SITE_DOMAIN}
 PORT=8080
-PRODUCTION=True
+PRODUCTION=${PRODUCTION}
 SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
 SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
 EOF
